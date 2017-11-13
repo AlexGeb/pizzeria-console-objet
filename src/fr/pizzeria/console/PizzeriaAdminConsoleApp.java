@@ -1,9 +1,14 @@
 package fr.pizzeria.console;
 
+import java.util.Scanner;
+
 import fr.pizzeria.Pizzeria;
-import fr.pizzeria.model.Pizza;
+import fr.pizzeria.menu.*;
+import fr.pizzeria.model.*;
 
 public class PizzeriaAdminConsoleApp {
+	static Menu[] menus = new Menu[5];
+	static Scanner menu = new Scanner(System.in);
 
 	/**
 	 * Méthode main
@@ -12,25 +17,48 @@ public class PizzeriaAdminConsoleApp {
 	 */
 	public static void main(String[] args) {
 		// Initialisation de la pizzeria
-		Pizzeria pizzeria = new Pizzeria(initPizzas());
+		Pizzeria pizzeria = new Pizzeria();
 		// Commencer à gérer les entrées utilisaeurs
-		pizzeria.displayMenu();
+		displayMenu(pizzeria);
+
+		menu.close();
+		System.out.println("**** Ciao, à plus tard ! ****");
 	}
 
-	/**
-	 * @return Pizza[8] (tableau de pizza initial)
-	 */
-	public static Pizza[] initPizzas() {
-		Pizza[] pizzas = new Pizza[8];
-		pizzas[0] = new Pizza("PEP", "Pépéroni", 12.5);
-		pizzas[1] = new Pizza("MAR", "Margherita", 14);
-		pizzas[2] = new Pizza("REIN", "La Reine", 11.5);
-		pizzas[3] = new Pizza("FRO", "La 4 fromages", 12);
-		pizzas[4] = new Pizza("CAN", "La cannibale", 12.5);
-		pizzas[5] = new Pizza("SAV", "La savoyarde", 13);
-		pizzas[6] = new Pizza("ORI", "L'orientale", 13.5);
-		pizzas[7] = new Pizza("IND", "L'indienne", 14);
-		return pizzas;
+	public static void displayMenu(Pizzeria pizzeria) {
+		while (true) {
+			System.out.println("***** Pizzeria Administration *****");
+			menus[0] = new Menu("1", "Lister les pizzas", new ListerPizzasOptionMenu(pizzeria));
+			menus[1] = new Menu("2", "Ajouter une nouvelle pizza", new AjouterPizzaOptionMenu(pizzeria,menu));
+			menus[2] = new Menu("3", "Mettre à jour une pizza", new ModifierPizzaOptionMenu(pizzeria));
+			menus[3] = new Menu("4", "Supprimer une pizza", new SupprimerPizzaOptionMenu(pizzeria));
+			menus[4] = new Menu("99", "Sortir");
+			// affiche les différentes options :
+			for (Menu m : menus)
+				System.out.println(m);
+
+			String option = menu.nextLine();
+
+			int menuIndex = findMenuForOption(option);
+			if (menuIndex >= 0 && menuIndex != 4) {
+				menus[menuIndex].optionMenu.execute(); // execute the proper logic
+			} else if (menuIndex == 4) {
+				return;
+			} else {
+				System.out.println("*** option inconnue, recommencez ***");
+			}
+		}
+	}
+
+	public static int findMenuForOption(String option) {
+		int index = -1;
+		for (int i = 0; i < menus.length; i++) {
+			if (menus[i].number.equals(option)) {
+				index = i;
+				break;
+			}
+		}
+		return index;
 	}
 
 }

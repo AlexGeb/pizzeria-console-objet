@@ -6,54 +6,35 @@ import java.util.Scanner;
 import fr.pizzeria.model.Pizza;
 
 public class Pizzeria {
-	Pizza[] pizzas;
+	public Pizza[] pizzas = new Pizza[8];;
 	Scanner menu = new Scanner(System.in);
 
-	public Pizzeria(Pizza[] thePizzas) {
-		this.pizzas = thePizzas;
+	public Pizzeria() {
+		this.initPizzas();
 	}
 
-	public void displayMenu() {
-		System.out.println("***** Pizzeria Administration *****");
-		System.out.println("1. Lister les pizzas");
-		System.out.println("2. Ajouter une nouvelle pizza");
-		System.out.println("3. Mettre à jour une nouvelle pizza");
-		System.out.println("4. Supprimer une pizza");
-		System.out.println("99. Sortir");
-		String option = menu.nextLine();
-		switch (option) {
-		case "1":
-			listPizzas();
-			displayMenu();
-			break;
-		case "2":
-			addPizza();
-			break;
-		case "3":
-			modifyPizza();
-			break;
-		case "4":
-			if(pizzas.length>0) {
-				deletePizza();
-			} else {
-				System.out.println("il n'y a pas de pizza");
-			}
-			break;
-		case "99":
-			break;
-		default:
-			break;
-
-		}
-		menu.close();
+	/** Initialize the pizzeria
+	 * @return Pizza[8] (tableau de pizza initial)
+	 */
+	private void initPizzas() {
+		pizzas[0] = new Pizza("PEP", "Pépéroni", 12.5);
+		pizzas[1] = new Pizza("MAR", "Margherita", 14);
+		pizzas[2] = new Pizza("REIN", "La Reine", 11.5);
+		pizzas[3] = new Pizza("FRO", "La 4 fromages", 12);
+		pizzas[4] = new Pizza("CAN", "La cannibale", 12.5);
+		pizzas[5] = new Pizza("SAV", "La savoyarde", 13);
+		pizzas[6] = new Pizza("ORI", "L'orientale", 13.5);
+		pizzas[7] = new Pizza("IND", "L'indienne", 14);
 	}
+	
 
-	private void listPizzas() {
+
+	public void listPizzas() {
 		for (Pizza p : pizzas)
-			System.out.println(p.toString());
+			System.out.println(p);
 	}
 
-	private void addPizza() {
+	public void addPizza() {
 		System.out.println("Veuillez saisir le code : ");
 		String code = menu.nextLine();
 		System.out.println("Veuillez saisir le nom (sans espace) : ");
@@ -64,7 +45,6 @@ public class Pizzeria {
 		Pizza[] result = Arrays.copyOf(pizzas, pizzas.length + 1);
 		System.arraycopy(newPizza, 0, result, pizzas.length, 1);
 		pizzas = result;
-		displayMenu();
 	}
 
 	private void modifyPizza() {
@@ -73,7 +53,6 @@ public class Pizzeria {
 		System.out.println("(99 pour abandonner)");
 		String code = menu.nextLine();
 		if (code.equals("99")) {
-			displayMenu();
 			return;
 		}
 
@@ -94,7 +73,6 @@ public class Pizzeria {
 		pizzaToUpdate.code = newcode;
 		pizzaToUpdate.name = name;
 		pizzaToUpdate.price = new Double(price);
-		displayMenu();
 		return;
 	}
 
@@ -104,7 +82,6 @@ public class Pizzeria {
 		System.out.println("(99 pour abandonner)");
 		String code = menu.nextLine();
 		if (code.equals("99")) {
-			displayMenu();
 			return;
 		}
 		int pizzaIndexToDelete = getPizzaIndexByCode(code);
@@ -120,7 +97,6 @@ public class Pizzeria {
 			deletePizza();
 			return;
 		}
-		displayMenu();
 	}
 
 	private Pizza getPizzaByCode(String code) {
