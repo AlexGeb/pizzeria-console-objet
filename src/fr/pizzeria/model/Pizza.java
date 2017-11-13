@@ -1,16 +1,21 @@
 package fr.pizzeria.model;
 
+/**
+ * @author ETY0002
+ * Class Pizza
+ */
 public class Pizza {
-	public static int numOfPizzas = 0;
+	
+	public static int numOfPizzas = 0; // variable pour garder en mémoire le nombre de pizza
 	public int id;
 	public String code;
 	public String name;
 	public double price;
 
 	/**
-	 * @param code
-	 * @param name
-	 * @param price
+	 * @param code String
+	 * @param name String
+	 * @param price double
 	 */
 	public Pizza(String code, String name, double price) {
 		this.id = numOfPizzas;

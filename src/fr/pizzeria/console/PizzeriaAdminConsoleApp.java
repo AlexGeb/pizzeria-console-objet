@@ -5,15 +5,23 @@ import fr.pizzeria.model.Pizza;
 
 public class PizzeriaAdminConsoleApp {
 
-	private static final int NUM_OF_PIZZA_INIT = 8;
-
+	/**
+	 * Méthode main
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
+		// Initialisation de la pizzeria
 		Pizzeria pizzeria = new Pizzeria(initPizzas());
+		// Commencer à gérer les entrées utilisaeurs
 		pizzeria.displayMenu();
 	}
 
+	/**
+	 * @return Pizza[8] (tableau de pizza initial)
+	 */
 	public static Pizza[] initPizzas() {
-		Pizza[] pizzas = new Pizza[NUM_OF_PIZZA_INIT];
+		Pizza[] pizzas = new Pizza[8];
 		pizzas[0] = new Pizza("PEP", "Pépéroni", 12.5);
 		pizzas[1] = new Pizza("MAR", "Margherita", 14);
 		pizzas[2] = new Pizza("REIN", "La Reine", 11.5);

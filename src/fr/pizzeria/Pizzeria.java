@@ -36,7 +36,7 @@ public class Pizzeria {
 			if(pizzas.length>0) {
 				deletePizza();
 			} else {
-				System.out.println("Il n'y a plus de pizza !");
+				System.out.println("il n'y a pas de pizza");
 			}
 			break;
 		case "99":
