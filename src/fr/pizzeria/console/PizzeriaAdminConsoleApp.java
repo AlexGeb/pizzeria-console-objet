@@ -1,6 +1,6 @@
 package fr.pizzeria.console;
 
-import pizzeria.Pizzeria;
+import fr.pizzeria.Pizzeria;
 import fr.pizzeria.model.Pizza;
 
 public class PizzeriaAdminConsoleApp {
@@ -10,7 +10,6 @@ public class PizzeriaAdminConsoleApp {
 	public static void main(String[] args) {
 		Pizzeria pizzeria = new Pizzeria(initPizzas());
 		pizzeria.displayMenu();
-
 	}
 
 	public static Pizza[] initPizzas() {
@@ -18,7 +17,7 @@ public class PizzeriaAdminConsoleApp {
 		pizzas[0] = new Pizza("PEP", "Pépéroni", 12.5);
 		pizzas[1] = new Pizza("MAR", "Margherita", 14);
 		pizzas[2] = new Pizza("REIN", "La Reine", 11.5);
-		pizzas[3] = new Pizza("FRO", "LA 4 fromages", 12);
+		pizzas[3] = new Pizza("FRO", "La 4 fromages", 12);
 		pizzas[4] = new Pizza("CAN", "La cannibale", 12.5);
 		pizzas[5] = new Pizza("SAV", "La savoyarde", 13);
 		pizzas[6] = new Pizza("ORI", "L'orientale", 13.5);

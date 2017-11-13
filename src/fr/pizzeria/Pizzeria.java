@@ -1,4 +1,4 @@
-package pizzeria;
+package fr.pizzeria;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -33,7 +33,11 @@ public class Pizzeria {
 			modifyPizza();
 			break;
 		case "4":
-			deletePizza();
+			if(pizzas.length>0) {
+				deletePizza();
+			} else {
+				System.out.println("Il n'y a plus de pizza !");
+			}
 			break;
 		case "99":
 			break;
@@ -123,7 +127,7 @@ public class Pizzeria {
 		Pizza pizz = null;
 		for (Pizza p : pizzas) {
 			pizz = (p.code.equals(code)) ? p : null;
-			if (p != null)
+			if (pizz != null)
 				break;
 		}
 		return pizz;
