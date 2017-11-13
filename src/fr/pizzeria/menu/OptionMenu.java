@@ -1,11 +1,11 @@
 package fr.pizzeria.menu;
 
-import fr.pizzeria.Pizzeria;
+import fr.pizzeria.dao.PizzaDaoImpl;
 
 public abstract class OptionMenu {
-	public Pizzeria pizzeria;
+	public PizzaDaoImpl pizzeria;
 	
-	public OptionMenu(Pizzeria pizzeria) {
+	public OptionMenu(PizzaDaoImpl pizzeria) {
 		this.pizzeria = pizzeria;
 	}
 	

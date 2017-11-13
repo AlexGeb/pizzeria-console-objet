@@ -2,7 +2,7 @@ package fr.pizzeria.menu;
 
 import java.util.Scanner;
 
-import fr.pizzeria.Pizzeria;
+import fr.pizzeria.dao.PizzaDaoImpl;
 import fr.pizzeria.model.Pizza;
 import fr.pizzeria.menu.ListerPizzasOptionMenu;
 
@@ -10,7 +10,7 @@ public class ModifierPizzaOptionMenu extends OptionMenu {
 
 	Scanner menu;
 
-	public ModifierPizzaOptionMenu(Pizzeria pizzeria, Scanner menu) {
+	public ModifierPizzaOptionMenu(PizzaDaoImpl pizzeria, Scanner menu) {
 		super(pizzeria);
 		this.menu = menu;
 	}
@@ -42,16 +42,13 @@ public class ModifierPizzaOptionMenu extends OptionMenu {
 		String name = menu.nextLine();
 		System.out.println("Veuillez saisir le prix : ");
 		String price = menu.nextLine();
-
-		pizzaToUpdate.code = newcode;
-		pizzaToUpdate.name = name;
-		pizzaToUpdate.price = new Double(price);
-		return;
+		
+		pizzeria.updatePizza(code, new Pizza(newcode,name,new Double(price)));
 	}
 	
 	private Pizza getPizzaByCode(String code) {
 		Pizza pizz = null;
-		for (Pizza p : pizzeria.pizzas) {
+		for (Pizza p : pizzeria.findAllPizzas()) {
 			pizz = (p.code.equals(code)) ? p : null;
 			if (pizz != null)
 				break;

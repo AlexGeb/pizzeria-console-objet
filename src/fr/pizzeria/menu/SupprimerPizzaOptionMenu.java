@@ -1,14 +1,15 @@
 package fr.pizzeria.menu;
 
 import java.util.Scanner;
-
-import fr.pizzeria.Pizzeria;
+import fr.pizzeria.dao.PizzaDaoImpl;
 import fr.pizzeria.model.Pizza;
 import fr.pizzeria.menu.ListerPizzasOptionMenu;
+
+
 public class SupprimerPizzaOptionMenu extends OptionMenu {
 	Scanner menu;
 
-	public SupprimerPizzaOptionMenu(Pizzeria pizzeria, Scanner menu) {
+	public SupprimerPizzaOptionMenu(PizzaDaoImpl pizzeria, Scanner menu) {
 		super(pizzeria);
 		this.menu = menu;
 	}
@@ -28,11 +29,7 @@ public class SupprimerPizzaOptionMenu extends OptionMenu {
 		}
 		int pizzaIndexToDelete = getPizzaIndexByCode(code);
 		if (pizzaIndexToDelete >= 0) {
-			Pizza[] result = new Pizza[pizzeria.pizzas.length - 1];
-			System.arraycopy(pizzeria.pizzas, 0, result, 0, pizzaIndexToDelete);
-			System.arraycopy(pizzeria.pizzas, pizzaIndexToDelete + 1, result, pizzaIndexToDelete,
-					result.length - pizzaIndexToDelete);
-			pizzeria.pizzas = result;
+			pizzeria.deletePizza(code);
 		} else {
 			System.out.println(code + " n'est pas un code de pizza valide !!");
 			deletePizza();
@@ -42,7 +39,7 @@ public class SupprimerPizzaOptionMenu extends OptionMenu {
 
 	private int getPizzaIndexByCode(String code) {
 		int index = -1;
-		for (Pizza p : pizzeria.pizzas) {
+		for (Pizza p : pizzeria.findAllPizzas()) {
 			index++;
 			if (p.code.equals(code))
 				break;
