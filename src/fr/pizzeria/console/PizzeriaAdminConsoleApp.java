@@ -26,13 +26,13 @@ public class PizzeriaAdminConsoleApp {
 	}
 
 	public static void displayMenu(Pizzeria pizzeria) {
+		menus[0] = new Menu("1", "Lister les pizzas", new ListerPizzasOptionMenu(pizzeria));
+		menus[1] = new Menu("2", "Ajouter une nouvelle pizza", new AjouterPizzaOptionMenu(pizzeria,menu));
+		menus[2] = new Menu("3", "Mettre à jour une pizza", new ModifierPizzaOptionMenu(pizzeria,menu));
+		menus[3] = new Menu("4", "Supprimer une pizza", new SupprimerPizzaOptionMenu(pizzeria,menu));
+		menus[4] = new Menu("99", "Sortir");
 		while (true) {
 			System.out.println("***** Pizzeria Administration *****");
-			menus[0] = new Menu("1", "Lister les pizzas", new ListerPizzasOptionMenu(pizzeria));
-			menus[1] = new Menu("2", "Ajouter une nouvelle pizza", new AjouterPizzaOptionMenu(pizzeria,menu));
-			menus[2] = new Menu("3", "Mettre à jour une pizza", new ModifierPizzaOptionMenu(pizzeria));
-			menus[3] = new Menu("4", "Supprimer une pizza", new SupprimerPizzaOptionMenu(pizzeria));
-			menus[4] = new Menu("99", "Sortir");
 			// affiche les différentes options :
 			for (Menu m : menus)
 				System.out.println(m);
