@@ -2,7 +2,7 @@ package fr.pizzeria.console;
 
 import java.util.Scanner;
 
-import fr.pizzeria.Pizzeria;
+import fr.pizzeria.dao.PizzaDaoImpl;
 import fr.pizzeria.menu.*;
 import fr.pizzeria.model.*;
 
@@ -17,15 +17,14 @@ public class PizzeriaAdminConsoleApp {
 	 */
 	public static void main(String[] args) {
 		// Initialisation de la pizzeria
-		Pizzeria pizzeria = new Pizzeria();
+		PizzaDaoImpl pizzeria = new PizzaDaoImpl();
 		// Commencer à gérer les entrées utilisaeurs
 		displayMenu(pizzeria);
-
 		menu.close();
 		System.out.println("**** Ciao, à plus tard ! ****");
 	}
 
-	public static void displayMenu(Pizzeria pizzeria) {
+	public static void displayMenu(PizzaDaoImpl pizzeria) {
 		menus[0] = new Menu("1", "Lister les pizzas", new ListerPizzasOptionMenu(pizzeria));
 		menus[1] = new Menu("2", "Ajouter une nouvelle pizza", new AjouterPizzaOptionMenu(pizzeria,menu));
 		menus[2] = new Menu("3", "Mettre à jour une pizza", new ModifierPizzaOptionMenu(pizzeria,menu));

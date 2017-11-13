@@ -49,6 +49,7 @@ public class PizzaDaoImpl implements IPizzaDao {
 		System.arraycopy(findAllPizzas(), 0, result, 0, pizzaIndexToDelete);
 		System.arraycopy(findAllPizzas(), pizzaIndexToDelete + 1, result, pizzaIndexToDelete,
 				result.length - pizzaIndexToDelete);
+		pizzas = result;
 		return true;
 	}
 	
