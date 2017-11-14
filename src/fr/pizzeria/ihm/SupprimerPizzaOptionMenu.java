@@ -1,8 +1,8 @@
-package fr.pizzeria.menu;
+package fr.pizzeria.ihm;
 
 import java.util.Scanner;
 import fr.pizzeria.dao.PizzaDaoImpl;
-import fr.pizzeria.menu.ListerPizzasOptionMenu;
+import fr.pizzeria.ihm.ListerPizzasOptionMenu;
 
 public class SupprimerPizzaOptionMenu extends OptionMenu {
 	Scanner menu;

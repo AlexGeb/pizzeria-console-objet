@@ -1,6 +1,7 @@
-package fr.pizzeria.menu;
+package fr.pizzeria.ihm;
 
 import fr.pizzeria.dao.PizzaDaoImpl;
+import fr.pizzeria.exception.ExitException;
 
 public abstract class OptionMenu {
 	private PizzaDaoImpl pizzeria;
@@ -19,7 +20,7 @@ public abstract class OptionMenu {
 		this.pizzeria = pizzeria;
 	}
 
-	public abstract void execute();
+	public abstract void execute() throws Exception;
 
 	public final PizzaDaoImpl getPizzeria() {
 		return pizzeria;

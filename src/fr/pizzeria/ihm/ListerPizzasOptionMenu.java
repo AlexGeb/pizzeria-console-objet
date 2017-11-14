@@ -1,4 +1,4 @@
-package fr.pizzeria.menu;
+package fr.pizzeria.ihm;
 
 import fr.pizzeria.dao.PizzaDaoImpl;
 import fr.pizzeria.model.Pizza;
@@ -12,13 +12,10 @@ public class ListerPizzasOptionMenu extends OptionMenu {
 
 	@Override
 	public void execute() {
-		// TODO Auto-generated method stub
-		System.out.println("*** Liste des pizzas ***");
+		System.out.println("*** Liste des pizzas *** (" + Pizza.getNumOfPizzas() +" pizzas)");
 		for (Pizza p : getPizzeria().findAllPizzas()) {
 			if (p!=null)
 				System.out.println(p);
-		}
-			
+		}	
 	}
-
 }
