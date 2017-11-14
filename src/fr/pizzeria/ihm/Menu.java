@@ -3,6 +3,9 @@ package fr.pizzeria.ihm;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.PizzaDaoImpl;
+import fr.pizzeria.exception.UnvalidCodeException;
+import fr.pizzeria.exception.UnvalidNameException;
+import fr.pizzeria.exception.UnvalidPriceException;
 
 public class Menu {
 	private String titre;
@@ -37,15 +40,21 @@ public class Menu {
 				actions[choixnum].execute();
 			} catch (Exception e) {
 				String eObj = e.getClass().getSimpleName();
-				System.out.println("**!!! " + e.getMessage() + " !!!**");
+				String msg = "";
 				switch (eObj) {
-				case "DeletePizzaException":
-				case "SavePizzaException":
-				case "UpdatePizzaException":
-					// pour les exceptions ci-dessus, on continue la boucle
+				case "UnvalidCodeException":
+				case "UnvalidNameException":
+				case "UnvalidPriceException":
+					// pour les exceptions ci-dessus, on print un message et on continue la boucle
+					msg = e.getMessage();
+					break;
+				case "ArrayIndexOutOfBoundsException":
+				case "NumberFormatException":
+					msg = choix + " n'est pas une option valide";
 					break;
 				case "ExitException":
 					// si on a fini, on sort
+					msg = e.getMessage();
 					condition = false;
 					scanner.close();
 					break;
@@ -53,6 +62,7 @@ public class Menu {
 					scanner.close();
 					throw e;
 				}
+				System.out.println("**!!! " + msg + " !!!**");
 			}
 		}
 	}

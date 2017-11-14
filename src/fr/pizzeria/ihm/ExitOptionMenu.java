@@ -18,7 +18,7 @@ public class ExitOptionMenu extends OptionMenu {
 
 	@Override
 	public void execute() throws ExitException {
-		throw new ExitException("Ciao, à bientôt !!!");
+		throw new ExitException("Ciao, à bientôt");
 	}
 
 }
