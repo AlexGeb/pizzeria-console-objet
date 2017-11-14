@@ -7,6 +7,7 @@ import fr.pizzeria.exception.UnvalidCodeException;
 import fr.pizzeria.exception.UnvalidNameException;
 import fr.pizzeria.exception.UnvalidPriceException;
 import fr.pizzeria.ihm.ListerPizzasOptionMenu;
+import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
 public class ModifierPizzaOptionMenu extends OptionMenu {
@@ -41,6 +42,6 @@ public class ModifierPizzaOptionMenu extends OptionMenu {
 		String price = menu.nextLine();
 		// check if the price is valid :
 		double prix = checkPizzaPrice(price);
-		pizzeria.updatePizza(code, new Pizza(newcode, name, prix));
+		pizzeria.updatePizza(code, new Pizza(newcode, name, prix, CategoriePizza.POISSON));
 	}
 }

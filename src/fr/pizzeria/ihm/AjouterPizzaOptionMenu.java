@@ -5,6 +5,7 @@ import java.util.Scanner;
 import fr.pizzeria.dao.PizzaDaoImpl;
 import fr.pizzeria.exception.UnvalidNameException;
 import fr.pizzeria.exception.UnvalidPriceException;
+import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
 public class AjouterPizzaOptionMenu extends OptionMenu {
@@ -26,9 +27,9 @@ public class AjouterPizzaOptionMenu extends OptionMenu {
 		System.out.println("Veuillez saisir le prix : ");
 		String price = menu.nextLine();
 		double prix = checkPizzaPrice(price);
-		Pizza newPizz = new Pizza(code, name, prix);
+		Pizza newPizz = new Pizza(code, name, prix, CategoriePizza.VIANDE);
 		boolean bool = pizzeria.saveNewPizza(newPizz);
-		if(bool) {
+		if (bool) {
 			System.out.println("Pizza created : \n" + newPizz);
 		}
 	}

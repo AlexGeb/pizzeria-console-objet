@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.pizzeria.model.Pizza;
+import fr.pizzeria.model.CategoriePizza;
 
 public class PizzaDaoImpl implements IPizzaDao {
 	private List<Pizza> pizzas = new ArrayList<Pizza>(); // pre-allocate 100 places for pizzas
@@ -16,14 +17,14 @@ public class PizzaDaoImpl implements IPizzaDao {
 	 * Initialize the pizzeria with 8 pizzas
 	 */
 	private void _init() {
-		pizzas.add(new Pizza("PEP", "Pépéroni", 12.5));
-		pizzas.add(new Pizza("MAR", "Margherita", 14));
-		pizzas.add(new Pizza("REIN", "La Reine", 11.5));
-		pizzas.add(new Pizza("FRO", "La 4 fromages", 12));
-		pizzas.add(new Pizza("CAN", "La cannibale", 12.5));
-		pizzas.add(new Pizza("SAV", "La savoyarde", 13));
-		pizzas.add(new Pizza("ORI", "L'orientale", 13.5));
-		pizzas.add(new Pizza("IND", "L'indienne", 14));
+		pizzas.add(new Pizza("PEP", "Pépéroni", 12.5,CategoriePizza.VIANDE));
+		pizzas.add(new Pizza("MAR", "Margherita", 14,CategoriePizza.VIANDE));
+		pizzas.add(new Pizza("REIN", "La Reine", 11.5,CategoriePizza.VIANDE));
+		pizzas.add(new Pizza("FRO", "La 4 fromages", 12,CategoriePizza.VIANDE));
+		pizzas.add(new Pizza("CAN", "La cannibale", 12.5,CategoriePizza.VIANDE));
+		pizzas.add(new Pizza("SAV", "La savoyarde", 13,CategoriePizza.VIANDE));
+		pizzas.add(new Pizza("ORI", "L'orientale", 13.5,CategoriePizza.VIANDE));
+		pizzas.add(new Pizza("IND", "L'indienne", 14,CategoriePizza.VIANDE));
 	}
 
 	@Override

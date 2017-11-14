@@ -10,17 +10,18 @@ public class Pizza {
 	private String code;
 	private String name;
 	private double price;
-
+	private CategoriePizza categoriePizza;
 	/** Instantiate a new Pizza
 	 * @param code unique String object to identify the pizza
 	 * @param name String => nom de la pizza
 	 * @param price Double => prix de la pizza
 	 */
-	public Pizza(String code, String name, double price) {
+	public Pizza(String code, String name, double price,CategoriePizza categoriePizza) {
 		numOfPizzas++;
 		this.code  = code.toUpperCase(); // toUpperCase() pour normalizer les codes
 		this.name = name;
 		this.price = price;
+		this.categoriePizza = categoriePizza;
 	}
 	
 	/** delete() has to be called each time you want to delete a pizza
@@ -59,7 +60,7 @@ public class Pizza {
 	 */
 	@Override
 	public String toString() {
-		return getCode() + " -> " + name + "(" + price + ")";
+		return getCode() + " -> " + name + "(" + categoriePizza.getValue() + ", " + price + ")";
 	}
 
 	/**
