@@ -43,7 +43,7 @@ public class PizzaDaoImpl implements IPizzaDao {
 		int pizzaIndexToUpdate = getPizzaIndexByCode(codePizza);
 		if (pizzaIndexToUpdate < 0)
 			return false; // pizza inexistante, on sort
-		
+
 		// on supprime l'ancienne pizza (doit être appelé pour décrémenter le nombre
 		// total de pizzas)
 		Pizza.delete();
@@ -56,10 +56,10 @@ public class PizzaDaoImpl implements IPizzaDao {
 		int pizzaIndexToDelete = getPizzaIndexByCode(codePizza);
 		if (pizzaIndexToDelete < 0)
 			return false;
-
 		// on supprime la pizza ( Pizza.delete() doit être appelé pour décrémenter le
 		// nombre total de pizzas)
-		pizzas[pizzaIndexToDelete] = Pizza.delete();
+		Pizza.delete();
+		pizzas.remove(pizzaIndexToDelete);
 		return true;
 	}
 
@@ -71,8 +71,8 @@ public class PizzaDaoImpl implements IPizzaDao {
 	public int getPizzaIndexByCode(String code) {
 		code = code.toUpperCase(); // normalization (we aren't case-sensitive)
 		int index = -1;
-		for (int i = 0; i < pizzas.length; i++) {
-			if (pizzas[i] != null && pizzas[i].getCode().equals(code)) {
+		for (int i = 0; i < pizzas.size(); i++) {
+			if (pizzas.get(i) != null && pizzas.get(i).getCode().equals(code)) {
 				index = i;
 				break;
 			}
