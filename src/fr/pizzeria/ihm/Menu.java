@@ -3,16 +3,15 @@ package fr.pizzeria.ihm;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.PizzaDaoImpl;
-import fr.pizzeria.exception.DeletePizzaException;
 
 public class Menu {
 	private String titre;
 	private OptionMenu[] actions = new OptionMenu[100];
+	private Scanner scanner = new Scanner(System.in);
 
 	public Menu() {
 		titre = "***** Pizzeria Administration *****";
 		PizzaDaoImpl pizzeria = new PizzaDaoImpl();
-		Scanner scanner = new Scanner(System.in);
 		actions[1] = new ListerPizzasOptionMenu(pizzeria);
 		actions[2] = new AjouterPizzaOptionMenu(pizzeria, scanner);
 		actions[3] = new ModifierPizzaOptionMenu(pizzeria, scanner);
@@ -29,7 +28,6 @@ public class Menu {
 	}
 
 	public void afficher() throws Exception {
-		Scanner scanner = new Scanner(System.in);
 		boolean condition = true;
 		while (condition) {
 			display();
@@ -39,14 +37,17 @@ public class Menu {
 				actions[choixnum].execute();
 			} catch (Exception e) {
 				String eObj = e.getClass().getSimpleName();
-				System.out.println(e.getMessage());
+				System.out.println("**!!! " + e.getMessage() + " !!!**");
 				switch (eObj) {
 				case "DeletePizzaException":
 				case "SavePizzaException":
 				case "UpdatePizzaException":
+					// pour les exceptions ci-dessus, on continue la boucle
 					break;
 				case "ExitException":
+					// si on a fini, on sort
 					condition = false;
+					scanner.close();
 					break;
 				default:
 					scanner.close();

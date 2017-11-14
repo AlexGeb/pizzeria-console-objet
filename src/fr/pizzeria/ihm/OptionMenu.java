@@ -1,10 +1,9 @@
 package fr.pizzeria.ihm;
 
 import fr.pizzeria.dao.PizzaDaoImpl;
-import fr.pizzeria.exception.ExitException;
 
 public abstract class OptionMenu {
-	private PizzaDaoImpl pizzeria;
+	protected PizzaDaoImpl pizzeria;
 
 	private String libelle;
 

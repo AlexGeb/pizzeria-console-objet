@@ -52,7 +52,8 @@ public class PizzaDaoImpl implements IPizzaDao {
 		return true;
 	}
 
-	private int getPizzaIndexByCode(String code) {
+	public int getPizzaIndexByCode(String code) {
+		code = code.toUpperCase();
 		int index = -1;
 		for (int i = 0; i < pizzas.length; i++) {
 			if (pizzas[i] != null && pizzas[i].getCode().equals(code)) {

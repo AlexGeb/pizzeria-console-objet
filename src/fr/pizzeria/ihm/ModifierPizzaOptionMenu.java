@@ -3,12 +3,13 @@ package fr.pizzeria.ihm;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.PizzaDaoImpl;
+import fr.pizzeria.exception.UpdatePizzaException;
 import fr.pizzeria.ihm.ListerPizzasOptionMenu;
 import fr.pizzeria.model.Pizza;
 
 public class ModifierPizzaOptionMenu extends OptionMenu {
 
-	Scanner menu;
+	private Scanner menu;
 
 	public ModifierPizzaOptionMenu(PizzaDaoImpl pizzeria, Scanner menu) {
 		super(pizzeria);
@@ -17,12 +18,12 @@ public class ModifierPizzaOptionMenu extends OptionMenu {
 	}
 
 	@Override
-	public void execute() {
+	public void execute() throws UpdatePizzaException {
 		modifyPizza();
 	}
 
-	private void modifyPizza() {
-		new ListerPizzasOptionMenu(getPizzeria()).execute();
+	private void modifyPizza() throws UpdatePizzaException {
+		new ListerPizzasOptionMenu(pizzeria).execute();
 		System.out.println("Veuillez choisir la pizza à modifier : ");
 		System.out.println("(99 pour abandonner)");
 		String code = menu.nextLine();
@@ -30,31 +31,26 @@ public class ModifierPizzaOptionMenu extends OptionMenu {
 			return;
 		}
 
-		Pizza pizzaToUpdate = getPizzaByCode(code);
-		if (pizzaToUpdate == null) {
-			System.out.println(code + " n'est pas un code de pizza valide !!");
-			modifyPizza();
-			return;
+		int pizzaIndexToUpdate = pizzeria.getPizzaIndexByCode(code);
+		if (pizzaIndexToUpdate < 0) {
+			throw new UpdatePizzaException("La pizza '" + code + "' est inconnue");
 		}
 
 		System.out.println("Veuillez saisir le code : ");
 		String newcode = menu.nextLine();
 		System.out.println("Veuillez saisir le nom (sans espace) : ");
 		String name = menu.nextLine();
+		if(name.contains(" ")) {
+			throw new UpdatePizzaException("'" + name + "' contient des espaces");
+		}
 		System.out.println("Veuillez saisir le prix : ");
 		String price = menu.nextLine();
-		
-		getPizzeria().updatePizza(code, new Pizza(newcode,name,new Double(price)));
-	}
-	
-	private Pizza getPizzaByCode(String code) {
-		Pizza pizz = null;
-		for (Pizza p : getPizzeria().findAllPizzas()) {
-			pizz = (p.getCode().equals(code)) ? p : null;
-			if (pizz != null)
-				break;
+		double prix = 0;
+		try {
+			prix = new Double(price);
+		} catch (NumberFormatException e) {
+			throw new UpdatePizzaException("Le prix est invalide");
 		}
-		return pizz;
+		pizzeria.updatePizza(code, new Pizza(newcode,name,prix));
 	}
-
 }

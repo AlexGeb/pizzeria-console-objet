@@ -18,7 +18,7 @@ public class Pizza {
 	 */
 	public Pizza(String code, String name, double price) {
 		numOfPizzas++;
-		this.setCode(code);
+		this.code  = code.toUpperCase();
 		this.name = name;
 		this.price = price;
 	}
