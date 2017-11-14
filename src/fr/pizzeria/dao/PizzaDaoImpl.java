@@ -33,12 +33,13 @@ public class PizzaDaoImpl implements IPizzaDao {
 
 	@Override
 	public boolean updatePizza(String codePizza, Pizza pizza) {
-		Pizza.delete();
+		
 		int pizzaIndexToUpdate = getPizzaIndexByCode(codePizza);
 		if (pizzaIndexToUpdate < 0) {
-			return false;
+			return false; // pizza inexistante, on sort
 		}
-		pizzas[pizzaIndexToUpdate] = pizza;
+		pizzas[pizzaIndexToUpdate] = Pizza.delete(); // on supprime l'ancienne pizza (doit être appelé pour décrémenter le nombre total de pizzas)
+		pizzas[pizzaIndexToUpdate] = pizza; // on place dans le tableau la nouvelle pizza.
 		return true;
 	}
 
