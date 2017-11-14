@@ -23,8 +23,9 @@ public class Pizza {
 		this.price = price;
 	}
 	
-	public static void delete() {
+	public static Pizza delete() {
 		numOfPizzas--;
+		return null;
 	}
 
 	/*

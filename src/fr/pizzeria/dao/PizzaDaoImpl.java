@@ -48,8 +48,7 @@ public class PizzaDaoImpl implements IPizzaDao {
 		if (pizzaIndexToDelete < 0) {
 			return false;
 		}
-		pizzas[pizzaIndexToDelete] = null;
-		Pizza.delete();
+		pizzas[pizzaIndexToDelete] = Pizza.delete();
 		return true;
 	}
 
