@@ -3,12 +3,15 @@ package fr.pizzeria.dao;
 import fr.pizzeria.model.Pizza;
 
 public class PizzaDaoImpl implements IPizzaDao {
-	private Pizza[] pizzas = new Pizza[100];
+	private Pizza[] pizzas = new Pizza[100]; // pre-allocate 100 places for pizzas
 
 	public PizzaDaoImpl() {
 		_init();
 	}
 
+	/**
+	 * Initialize the pizzeria with 8 pizzas
+	 */
 	private void _init() {
 		pizzas[0] = new Pizza("PEP", "Pépéroni", 12.5);
 		pizzas[1] = new Pizza("MAR", "Margherita", 14);
@@ -22,7 +25,14 @@ public class PizzaDaoImpl implements IPizzaDao {
 
 	@Override
 	public Pizza[] findAllPizzas() {
-		return pizzas;
+		// we select only the not null pizzas
+		Pizza[] notNullPizzas = new Pizza[Pizza.getNumOfPizzas()];
+		for (int i = 0; i < pizzas.length; i++) {
+			if (pizzas[i]!=null) {
+				notNullPizzas[i] = pizzas[i];
+			}
+		}
+		return notNullPizzas;
 	}
 
 	@Override
@@ -33,28 +43,39 @@ public class PizzaDaoImpl implements IPizzaDao {
 
 	@Override
 	public boolean updatePizza(String codePizza, Pizza pizza) {
-		
+
 		int pizzaIndexToUpdate = getPizzaIndexByCode(codePizza);
-		if (pizzaIndexToUpdate < 0) {
+		if (pizzaIndexToUpdate < 0)
 			return false; // pizza inexistante, on sort
-		}
-		pizzas[pizzaIndexToUpdate] = Pizza.delete(); // on supprime l'ancienne pizza (doit être appelé pour décrémenter le nombre total de pizzas)
-		pizzas[pizzaIndexToUpdate] = pizza; // on place dans le tableau la nouvelle pizza.
+
+		// on supprime l'ancienne pizza (doit être appelé pour décrémenter le nombre
+		// total de pizzas)
+		pizzas[pizzaIndexToUpdate] = Pizza.delete();
+
+		// on place dans le tableau la nouvelle pizza.
+		pizzas[pizzaIndexToUpdate] = pizza;
 		return true;
 	}
 
 	@Override
 	public boolean deletePizza(String codePizza) {
 		int pizzaIndexToDelete = getPizzaIndexByCode(codePizza);
-		if (pizzaIndexToDelete < 0) {
+		if (pizzaIndexToDelete < 0)
 			return false;
-		}
+
+		// on supprime la pizza ( Pizza.delete() doit être appelé pour décrémenter le
+		// nombre total de pizzas)
 		pizzas[pizzaIndexToDelete] = Pizza.delete();
 		return true;
 	}
 
+	/**
+	 * @param code
+	 *            String unique identifier for a pizza
+	 * @return the index if the pizza exist, -1 if it doesn't
+	 */
 	public int getPizzaIndexByCode(String code) {
-		code = code.toUpperCase();
+		code = code.toUpperCase(); // normalization (we aren't case-sensitive)
 		int index = -1;
 		for (int i = 0; i < pizzas.length; i++) {
 			if (pizzas[i] != null && pizzas[i].getCode().equals(code)) {
