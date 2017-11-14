@@ -1,12 +1,14 @@
 package fr.pizzeria.dao;
 
+import java.util.List;
+
 import fr.pizzeria.model.Pizza;
 
 public interface IPizzaDao {
 	/**
 	 * @return Pizza[], all the pizzas in the pizzeria
 	 */
-	Pizza[] findAllPizzas();
+	List<Pizza> findAllPizzas();
 
 	/**
 	 * Used to save a pizza in the pizzeria system

@@ -1,9 +1,12 @@
 package fr.pizzeria.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import fr.pizzeria.model.Pizza;
 
 public class PizzaDaoImpl implements IPizzaDao {
-	private Pizza[] pizzas = new Pizza[100]; // pre-allocate 100 places for pizzas
+	private List<Pizza> pizzas = new ArrayList<Pizza>(); // pre-allocate 100 places for pizzas
 
 	public PizzaDaoImpl() {
 		_init();
@@ -13,31 +16,24 @@ public class PizzaDaoImpl implements IPizzaDao {
 	 * Initialize the pizzeria with 8 pizzas
 	 */
 	private void _init() {
-		pizzas[0] = new Pizza("PEP", "Pépéroni", 12.5);
-		pizzas[1] = new Pizza("MAR", "Margherita", 14);
-		pizzas[2] = new Pizza("REIN", "La Reine", 11.5);
-		pizzas[3] = new Pizza("FRO", "La 4 fromages", 12);
-		pizzas[4] = new Pizza("CAN", "La cannibale", 12.5);
-		pizzas[5] = new Pizza("SAV", "La savoyarde", 13);
-		pizzas[6] = new Pizza("ORI", "L'orientale", 13.5);
-		pizzas[7] = new Pizza("IND", "L'indienne", 14);
+		pizzas.add(new Pizza("PEP", "Pépéroni", 12.5));
+		pizzas.add(new Pizza("MAR", "Margherita", 14));
+		pizzas.add(new Pizza("REIN", "La Reine", 11.5));
+		pizzas.add(new Pizza("FRO", "La 4 fromages", 12));
+		pizzas.add(new Pizza("CAN", "La cannibale", 12.5));
+		pizzas.add(new Pizza("SAV", "La savoyarde", 13));
+		pizzas.add(new Pizza("ORI", "L'orientale", 13.5));
+		pizzas.add(new Pizza("IND", "L'indienne", 14));
 	}
 
 	@Override
-	public Pizza[] findAllPizzas() {
-		// we select only the not null pizzas
-		Pizza[] notNullPizzas = new Pizza[Pizza.getNumOfPizzas()];
-		for (int i = 0; i < pizzas.length; i++) {
-			if (pizzas[i]!=null) {
-				notNullPizzas[i] = pizzas[i];
-			}
-		}
-		return notNullPizzas;
+	public List<Pizza> findAllPizzas() {
+		return pizzas;
 	}
 
 	@Override
 	public boolean saveNewPizza(Pizza pizza) {
-		pizzas[Pizza.getNumOfPizzas() - 1] = pizza;
+		pizzas.add(pizza);
 		return true;
 	}
 
@@ -47,13 +43,11 @@ public class PizzaDaoImpl implements IPizzaDao {
 		int pizzaIndexToUpdate = getPizzaIndexByCode(codePizza);
 		if (pizzaIndexToUpdate < 0)
 			return false; // pizza inexistante, on sort
-
+		
 		// on supprime l'ancienne pizza (doit être appelé pour décrémenter le nombre
 		// total de pizzas)
-		pizzas[pizzaIndexToUpdate] = Pizza.delete();
-
-		// on place dans le tableau la nouvelle pizza.
-		pizzas[pizzaIndexToUpdate] = pizza;
+		Pizza.delete();
+		pizzas.set(pizzaIndexToUpdate, pizza);
 		return true;
 	}
 
