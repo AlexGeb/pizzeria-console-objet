@@ -6,11 +6,10 @@ package fr.pizzeria.model;
  */
 public class Pizza {
 	
-	public static int numOfPizzas = 0; // variable pour garder en mémoire le nombre de pizza
-	public int id;
-	public String code;
-	public String name;
-	public double price;
+	private static int numOfPizzas = 0; // variable pour garder en mémoire le nombre de pizza
+	private String code;
+	private String name;
+	private double price;
 
 	/**
 	 * @param code String
@@ -18,11 +17,14 @@ public class Pizza {
 	 * @param price double
 	 */
 	public Pizza(String code, String name, double price) {
-		this.id = numOfPizzas;
 		numOfPizzas++;
-		this.code = code;
+		this.setCode(code);
 		this.name = name;
 		this.price = price;
+	}
+	
+	public static void delete() {
+		numOfPizzas--;
 	}
 
 	/*
@@ -37,20 +39,33 @@ public class Pizza {
 		if (getClass() != obj.getClass())
 			return false;
 		Pizza other = (Pizza) obj;
-		if (code == null) {
-			if (other.code != null)
+		if (getCode() == null) {
+			if (other.getCode() != null)
 				return false;
-		} else if (!code.equals(other.code))
+		} else if (!getCode().equals(other.getCode()))
 			return false;
 		return true;
 	}
+	
 
 	/*
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return code + " -> " + name + "(" + price + ")";
+		return getCode() + " -> " + name + "(" + price + ")";
+	}
+
+	public static int getNumOfPizzas() {
+		return numOfPizzas;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 }

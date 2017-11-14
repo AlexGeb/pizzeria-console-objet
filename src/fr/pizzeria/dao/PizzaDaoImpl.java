@@ -1,11 +1,9 @@
 package fr.pizzeria.dao;
 
-import java.util.Arrays;
-
 import fr.pizzeria.model.Pizza;
 
 public class PizzaDaoImpl implements IPizzaDao {
-	private Pizza[] pizzas = new Pizza[8];
+	private Pizza[] pizzas = new Pizza[100];
 
 	public PizzaDaoImpl() {
 		_init();
@@ -29,48 +27,40 @@ public class PizzaDaoImpl implements IPizzaDao {
 
 	@Override
 	public boolean saveNewPizza(Pizza pizza) {
-		Pizza[] result = Arrays.copyOf(pizzas, Pizza.numOfPizzas + 1);
-		System.arraycopy(pizza, 0, result, Pizza.numOfPizzas, 1);
-		pizzas = result;
+		pizzas[Pizza.getNumOfPizzas() - 1] = pizza;
 		return true;
 	}
 
 	@Override
 	public boolean updatePizza(String codePizza, Pizza pizza) {
-		Pizza pizz = getPizzaByCode(codePizza);
-		pizz = pizza;
+		Pizza.delete();
+		int pizzaIndexToUpdate = getPizzaIndexByCode(codePizza);
+		if (pizzaIndexToUpdate < 0) {
+			return false;
+		}
+		pizzas[pizzaIndexToUpdate] = pizza;
 		return true;
 	}
 
 	@Override
 	public boolean deletePizza(String codePizza) {
 		int pizzaIndexToDelete = getPizzaIndexByCode(codePizza);
-		Pizza[] result = new Pizza[Pizza.numOfPizzas - 1];
-		System.arraycopy(findAllPizzas(), 0, result, 0, pizzaIndexToDelete);
-		System.arraycopy(findAllPizzas(), pizzaIndexToDelete + 1, result, pizzaIndexToDelete,
-				result.length - pizzaIndexToDelete);
-		pizzas = result;
+		if (pizzaIndexToDelete < 0) {
+			return false;
+		}
+		pizzas[pizzaIndexToDelete] = null;
+		Pizza.delete();
 		return true;
 	}
-	
+
 	private int getPizzaIndexByCode(String code) {
 		int index = -1;
-		for (Pizza p : pizzas) {
-			index++;
-			if (p.code.equals(code))
+		for (int i = 0; i < pizzas.length; i++) {
+			if (pizzas[i] != null && pizzas[i].getCode().equals(code)) {
+				index = i;
 				break;
+			}
 		}
 		return index;
 	}
-	
-	private Pizza getPizzaByCode(String code) {
-		Pizza pizz = null;
-		for (Pizza p : pizzas) {
-			pizz = (p.code.equals(code)) ? p : null;
-			if (pizz != null)
-				break;
-		}
-		return pizz;
-	}
-
 }

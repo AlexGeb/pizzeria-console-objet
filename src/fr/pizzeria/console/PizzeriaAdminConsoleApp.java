@@ -7,8 +7,6 @@ import fr.pizzeria.menu.*;
 import fr.pizzeria.model.*;
 
 public class PizzeriaAdminConsoleApp {
-	static Menu[] menus = new Menu[5];
-	static Scanner menu = new Scanner(System.in);
 
 	/**
 	 * Méthode main
@@ -18,46 +16,22 @@ public class PizzeriaAdminConsoleApp {
 	public static void main(String[] args) {
 		// Initialisation de la pizzeria
 		PizzaDaoImpl pizzeria = new PizzaDaoImpl();
+		Scanner scanner = new Scanner(System.in);
+		// creation du menu principal
+		Menu menu = createMenu(pizzeria, scanner);
 		// Commencer à gérer les entrées utilisaeurs
-		displayMenu(pizzeria);
-		menu.close();
+		menu.afficher();
+		// Si on est la, c'est qu'on veut sortir du programme :
 		System.out.println("**** Ciao, à plus tard ! ****");
 	}
 
-	public static void displayMenu(PizzaDaoImpl pizzeria) {
-		menus[0] = new Menu("1", "Lister les pizzas", new ListerPizzasOptionMenu(pizzeria));
-		menus[1] = new Menu("2", "Ajouter une nouvelle pizza", new AjouterPizzaOptionMenu(pizzeria,menu));
-		menus[2] = new Menu("3", "Mettre à jour une pizza", new ModifierPizzaOptionMenu(pizzeria,menu));
-		menus[3] = new Menu("4", "Supprimer une pizza", new SupprimerPizzaOptionMenu(pizzeria,menu));
-		menus[4] = new Menu("99", "Sortir");
-		while (true) {
-			System.out.println("***** Pizzeria Administration *****");
-			// affiche les différentes options :
-			for (Menu m : menus)
-				System.out.println(m);
-
-			String option = menu.nextLine();
-
-			int menuIndex = findMenuForOption(option);
-			if (menuIndex >= 0 && menuIndex != 4) {
-				menus[menuIndex].optionMenu.execute(); // execute the proper logic
-			} else if (menuIndex == 4) {
-				return;
-			} else {
-				System.out.println("*** option inconnue, recommencez ***");
-			}
-		}
+	private static Menu createMenu(PizzaDaoImpl pizzeria, Scanner scanner) {
+		OptionMenu[] actions = new OptionMenu[4];
+		actions[0] = new ListerPizzasOptionMenu(pizzeria);
+		actions[1] = new AjouterPizzaOptionMenu(pizzeria, scanner);
+		actions[2] = new ModifierPizzaOptionMenu(pizzeria, scanner);
+		actions[3] = new SupprimerPizzaOptionMenu(pizzeria, scanner);
+		Menu menu = new Menu("***** Pizzeria Administration *****", actions);
+		return menu;
 	}
-
-	public static int findMenuForOption(String option) {
-		int index = -1;
-		for (int i = 0; i < menus.length; i++) {
-			if (menus[i].number.equals(option)) {
-				index = i;
-				break;
-			}
-		}
-		return index;
-	}
-
 }

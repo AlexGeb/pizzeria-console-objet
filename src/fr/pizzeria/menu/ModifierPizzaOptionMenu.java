@@ -12,6 +12,7 @@ public class ModifierPizzaOptionMenu extends OptionMenu {
 
 	public ModifierPizzaOptionMenu(PizzaDaoImpl pizzeria, Scanner menu) {
 		super(pizzeria);
+		this.setLibelle("Modifier une pizza");
 		this.menu = menu;
 	}
 
@@ -21,7 +22,7 @@ public class ModifierPizzaOptionMenu extends OptionMenu {
 	}
 
 	private void modifyPizza() {
-		new ListerPizzasOptionMenu(pizzeria).execute();
+		new ListerPizzasOptionMenu(getPizzeria()).execute();
 		System.out.println("Veuillez choisir la pizza à modifier : ");
 		System.out.println("(99 pour abandonner)");
 		String code = menu.nextLine();
@@ -43,13 +44,13 @@ public class ModifierPizzaOptionMenu extends OptionMenu {
 		System.out.println("Veuillez saisir le prix : ");
 		String price = menu.nextLine();
 		
-		pizzeria.updatePizza(code, new Pizza(newcode,name,new Double(price)));
+		getPizzeria().updatePizza(code, new Pizza(newcode,name,new Double(price)));
 	}
 	
 	private Pizza getPizzaByCode(String code) {
 		Pizza pizz = null;
-		for (Pizza p : pizzeria.findAllPizzas()) {
-			pizz = (p.code.equals(code)) ? p : null;
+		for (Pizza p : getPizzeria().findAllPizzas()) {
+			pizz = (p.getCode().equals(code)) ? p : null;
 			if (pizz != null)
 				break;
 		}

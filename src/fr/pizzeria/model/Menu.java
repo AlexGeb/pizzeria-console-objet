@@ -1,25 +1,43 @@
 package fr.pizzeria.model;
 
+import java.util.Scanner;
+
 import fr.pizzeria.menu.OptionMenu;
 
 public class Menu {
-	public String text;
-	public String number;
-	public OptionMenu optionMenu;
-	
-	public Menu(String number, String text) {
-		this.number = number;
-		this.text = text;
+	private String titre;
+	private OptionMenu[] actions;
+
+	public Menu(String titre, OptionMenu[] actions) {
+		this.titre = titre;
+		this.actions = actions;
 	}
-	public Menu(String number, String text,OptionMenu optionMenu) {
-		this(number,text);
-		this.optionMenu = optionMenu;
+
+	private void display() {
+		System.out.println(titre);
+		for (int i = 1; i < actions.length + 1; i++) {
+			System.out.println(i + ". " + actions[i - 1].getLibelle());
+		}
+		System.out.println("99. Quitter");
 	}
-	/* 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return number + ". " + text;
+
+	public void afficher() {
+		Scanner scanner = new Scanner(System.in);
+		while (true) {
+			display();
+			String choix = scanner.nextLine();
+			if(choix.equals("99"))
+				break;
+			try {
+				int choixnum = new Integer(choix);
+				actions[choixnum - 1].execute();
+			} catch (Exception e) {
+				System.out.println("ERROR");
+				System.out.println(e.toString());
+				break;
+			}
+		}
+		scanner.close();
 	}
+
 }
