@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.exception.ExitException;
+import fr.pizzeria.swing.MyApplication;
 
 public class ExitOptionMenu extends OptionMenu {
 	IPizzaDao pizzeria;
@@ -19,6 +20,13 @@ public class ExitOptionMenu extends OptionMenu {
 	@Override
 	public void execute() throws ExitException {
 		throw new ExitException("Ciao, à bientôt");
+	}
+
+
+	@Override
+	public String executeForIhm(MyApplication myApplication) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -3,12 +3,15 @@ package fr.pizzeria.ihm;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
+import fr.pizzeria.exception.StockageException;
 import fr.pizzeria.exception.UnvalidCodeException;
 import fr.pizzeria.exception.UnvalidNameException;
 import fr.pizzeria.exception.UnvalidPriceException;
 import fr.pizzeria.ihm.ListerPizzasOptionMenu;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
+import fr.pizzeria.swing.Input;
+import fr.pizzeria.swing.MyApplication;
 
 public class ModifierPizzaOptionMenu extends OptionMenu {
 
@@ -42,9 +45,26 @@ public class ModifierPizzaOptionMenu extends OptionMenu {
 		String price = menu.nextLine();
 		// check if the price is valid :
 		double prix = checkPizzaPrice(price);
-		
+
 		CategoriePizza categorie = new SelectCategoryPizzaInput(menu).execute();
-		
+
 		pizzeria.updatePizza(code, new Pizza(newcode, name, prix, categorie));
+	}
+
+	@Override
+	public String executeForIhm(MyApplication myApplication) throws StockageException {
+		String oldCode = myApplication.ask("code");
+		// check if pizza exist :
+		checkPizzaCode(oldCode);
+
+		Input input = myApplication.askMultiple("code", "nom", "prix", "categorie");
+		String code = input.getValue("code");
+		String name = input.getValue("nom");
+		checkPizzaName(name);
+		double price = checkPizzaPrice(input.getValue("prix"));
+		CategoriePizza cat = CategoriePizza.valueOf(input.getValue("categorie").toUpperCase());
+		Pizza newPizz = new Pizza(code, name, price, cat);
+		boolean bool = pizzeria.updatePizza(oldCode, newPizz);
+		return bool ? "Pizza modified : \n" + newPizz : "ERROR at saving";
 	}
 }

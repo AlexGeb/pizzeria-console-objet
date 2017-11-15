@@ -1,9 +1,11 @@
 package fr.pizzeria.ihm;
 
 import fr.pizzeria.dao.IPizzaDao;
+import fr.pizzeria.exception.StockageException;
 import fr.pizzeria.exception.UnvalidCodeException;
 import fr.pizzeria.exception.UnvalidNameException;
 import fr.pizzeria.exception.UnvalidPriceException;
+import fr.pizzeria.swing.MyApplication;
 
 /**
  * 
@@ -80,4 +82,7 @@ public abstract class OptionMenu {
 		if (pizzaName.trim().contains(" "))
 			throw new UnvalidNameException(pizzaName + " n'est pas un nom valide pour une pizza");
 	}
+
+	public abstract String executeForIhm(MyApplication myApplication) throws StockageException;
+
 }

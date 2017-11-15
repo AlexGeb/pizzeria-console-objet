@@ -147,7 +147,7 @@ public abstract class DefaultSwingApplication {
 	 * @param code code
 	 * @return String
 	 */
-	protected String ask(String code) {
+	public String ask(String code) {
 
 		JTextField field = new JTextField(10);
 
@@ -179,7 +179,7 @@ public abstract class DefaultSwingApplication {
 	 * @param codes codes des questions
 	 * @return {@link Input}
 	 */
-	protected Input askMultiple(String... codes) {
+	public Input askMultiple(String... codes) {
 		Input input = new Input(codes);
 
 		JTextField[] fields = new JTextField[codes.length];

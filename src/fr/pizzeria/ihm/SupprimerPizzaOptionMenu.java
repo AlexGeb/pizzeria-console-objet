@@ -5,6 +5,7 @@ import java.util.Scanner;
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.exception.UnvalidCodeException;
 import fr.pizzeria.ihm.ListerPizzasOptionMenu;
+import fr.pizzeria.swing.MyApplication;
 
 public class SupprimerPizzaOptionMenu extends OptionMenu {
 	Scanner menu;
@@ -28,5 +29,14 @@ public class SupprimerPizzaOptionMenu extends OptionMenu {
 		checkPizzaCode(code);
 		// if no errors, we can safely delete the pizza
 		pizzeria.deletePizza(code);
+	}
+
+	@Override
+	public String executeForIhm(MyApplication myApplication) throws UnvalidCodeException {
+		String code = myApplication.ask("code");
+		// check if pizza exists
+		checkPizzaCode(code);
+		// if no errors, we can safely delete the pizza
+		return pizzeria.deletePizza(code)?"Pizza supprimée avec succès":"Error at deleting pizza";
 	}
 }

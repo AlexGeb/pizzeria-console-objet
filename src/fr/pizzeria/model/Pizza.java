@@ -113,7 +113,6 @@ public class Pizza {
 				}
 			}
 		}
-
 		return pizzaString.trim();
 	}
 

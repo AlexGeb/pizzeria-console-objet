@@ -4,6 +4,7 @@ import java.util.List;
 
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.model.Pizza;
+import fr.pizzeria.swing.MyApplication;
 
 public class ListerPizzasOptionMenu extends OptionMenu {
 
@@ -19,5 +20,15 @@ public class ListerPizzasOptionMenu extends OptionMenu {
 		for (Pizza p : pizzas) {
 				System.out.println(p);
 		}	
+	}
+
+	@Override
+	public String executeForIhm(MyApplication myApplication) {
+		List<Pizza> pizzas = pizzeria.findAllPizzas();
+		String pizzaListString = "";
+		for (Pizza p : pizzas) {
+			pizzaListString+=p.toString() + "\n";
+		}
+		return pizzaListString;
 	}
 }

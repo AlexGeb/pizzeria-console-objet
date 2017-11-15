@@ -1,14 +1,24 @@
 package fr.pizzeria.swing;
 
-public class MyApplication extends DefaultSwingApplication {
+import java.util.Map;
 
-	public MyApplication() {
+import fr.pizzeria.ihm.Menu;
+import fr.pizzeria.ihm.OptionMenu;
+
+public class MyApplication extends DefaultSwingApplication {
+	static Menu menu;
+	public static void start(Menu menuPrincipal) {
+		menu = menuPrincipal;
 		start(MyApplication.class);
 	}
 
 	public void configureUI() {
 		configureWindow("Title", 400, 400);
-		addButton(1, "Coucou", 20, 20);
+		int verticalPosition = 0;
+		for(Map.Entry<Integer, OptionMenu> pair : menu.actions.entrySet()) {
+			verticalPosition+=30;
+			addButton(pair.getKey(), pair.getValue().getLibelle(), 20, verticalPosition);
+		}
 		setTextArea(20, 180);
 	}
 
@@ -17,11 +27,13 @@ public class MyApplication extends DefaultSwingApplication {
 	}
 
 	public void execute(int choix, ApplicationContext context) {
-
-		println("Hello");
-
-		/* TODO: pour interroger l'utilisateur, utilisez la méthode ask */
-		String code = ask("code");
-		System.out.println(code);
+		try {
+			String msg = menu.actions.get(choix).executeForIhm(this);
+			clearScreen();
+			println(msg);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

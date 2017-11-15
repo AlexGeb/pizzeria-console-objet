@@ -2,6 +2,7 @@ package fr.pizzeria.console;
 
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.dao.PizzaDaoFilePersistence;
+import fr.pizzeria.dao.PizzaDaoImpl;
 import fr.pizzeria.ihm.Menu;
 import fr.pizzeria.swing.MyApplication;
 
@@ -22,8 +23,8 @@ public class PizzeriaAdminConsoleApp {
 	 * @throws Exception 
 	 */
 	public static void main(String[] args) throws Exception {
-		// ihmMode();
-		consoleMode();
+		ihmMode();
+		//consoleMode();
 	}
 
 	private static void consoleMode() throws Exception {
@@ -35,7 +36,10 @@ public class PizzeriaAdminConsoleApp {
 	}
 
 	private static void ihmMode() {
-		new MyApplication();
+		IPizzaDao daoClass = new PizzaDaoImpl();
+		// creation du menu principal
+		Menu menu = new Menu(daoClass);
+		MyApplication.start(menu);
 	}
 
 }

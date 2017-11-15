@@ -1,6 +1,8 @@
 package fr.pizzeria.ihm;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -23,7 +25,7 @@ import fr.pizzeria.utils.StringUtils;
  */
 public class Menu {
 	private final String TITRE = "***** Pizzeria Administration *****";
-	private Map<Integer, OptionMenu> actions = new HashMap<Integer, OptionMenu>();
+	public Map<Integer, OptionMenu> actions = new HashMap<Integer, OptionMenu>();
 	private Scanner scanner = new Scanner(System.in);
 
 	/**
