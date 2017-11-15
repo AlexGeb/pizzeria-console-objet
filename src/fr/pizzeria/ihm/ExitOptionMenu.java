@@ -25,7 +25,7 @@ public class ExitOptionMenu extends OptionMenu {
 
 	@Override
 	public String executeForIhm(MyApplication myApplication) {
-		// TODO Auto-generated method stub
+		System.exit(0);
 		return null;
 	}
 

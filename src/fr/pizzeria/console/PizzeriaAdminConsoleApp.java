@@ -36,7 +36,7 @@ public class PizzeriaAdminConsoleApp {
 	}
 
 	private static void ihmMode() {
-		IPizzaDao daoClass = new PizzaDaoImpl();
+		IPizzaDao daoClass = new PizzaDaoFilePersistence();
 		// creation du menu principal
 		Menu menu = new Menu(daoClass);
 		MyApplication.start(menu);
