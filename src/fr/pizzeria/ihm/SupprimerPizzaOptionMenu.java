@@ -16,10 +16,6 @@ public class SupprimerPizzaOptionMenu extends OptionMenu {
 
 	@Override
 	public void execute() throws UnvalidCodeException {
-		deletePizza();
-	}
-
-	private void deletePizza() throws UnvalidCodeException {
 		new ListerPizzasOptionMenu(getPizzeria()).execute();
 		System.out.println("Veuillez choisir la pizza à supprimer : ");
 		System.out.println("(99 pour abandonner)");
@@ -29,6 +25,7 @@ public class SupprimerPizzaOptionMenu extends OptionMenu {
 		}
 		// check if pizza exists
 		checkPizzaCode(code);
+		// if no errors, we can safely delete the pizza
 		pizzeria.deletePizza(code);
 	}
 }

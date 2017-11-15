@@ -1,6 +1,6 @@
 package fr.pizzeria.exception;
 
-public class UnvalidPriceException extends Exception {
+public class UnvalidPriceException extends StockageException {
 
 	private static final long serialVersionUID = 6175530755425672239L;
 

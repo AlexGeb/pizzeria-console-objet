@@ -1,6 +1,6 @@
 package fr.pizzeria.exception;
 
-public class UnvalidNameException extends Exception {
+public class UnvalidNameException extends StockageException {
 
 	private static final long serialVersionUID = -2251735358098404487L;
 
