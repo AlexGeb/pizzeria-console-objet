@@ -2,7 +2,7 @@ package fr.pizzeria.ihm;
 
 import java.util.Scanner;
 
-import fr.pizzeria.dao.PizzaDaoImpl;
+import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.exception.UnvalidCodeException;
 import fr.pizzeria.exception.UnvalidNameException;
 import fr.pizzeria.exception.UnvalidPriceException;
@@ -14,7 +14,7 @@ public class ModifierPizzaOptionMenu extends OptionMenu {
 
 	private Scanner menu;
 
-	public ModifierPizzaOptionMenu(PizzaDaoImpl pizzeria, Scanner menu) {
+	public ModifierPizzaOptionMenu(IPizzaDao pizzeria, Scanner menu) {
 		super(pizzeria);
 		this.setLibelle("Modifier une pizza");
 		this.menu = menu;
@@ -42,6 +42,9 @@ public class ModifierPizzaOptionMenu extends OptionMenu {
 		String price = menu.nextLine();
 		// check if the price is valid :
 		double prix = checkPizzaPrice(price);
-		pizzeria.updatePizza(code, new Pizza(newcode, name, prix, CategoriePizza.POISSON));
+		
+		CategoriePizza categorie = new SelectCategoryPizzaInput(menu).execute();
+		
+		pizzeria.updatePizza(code, new Pizza(newcode, name, prix, categorie));
 	}
 }

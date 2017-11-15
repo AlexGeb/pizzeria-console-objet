@@ -1,14 +1,15 @@
 package fr.pizzeria.ihm;
 
 import java.util.Scanner;
-import fr.pizzeria.dao.PizzaDaoImpl;
+
+import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.exception.UnvalidCodeException;
 import fr.pizzeria.ihm.ListerPizzasOptionMenu;
 
 public class SupprimerPizzaOptionMenu extends OptionMenu {
 	Scanner menu;
 
-	public SupprimerPizzaOptionMenu(PizzaDaoImpl pizzeria, Scanner menu) {
+	public SupprimerPizzaOptionMenu(IPizzaDao pizzeria, Scanner menu) {
 		super(pizzeria);
 		this.setLibelle("Supprimer une pizza");
 		this.menu = menu;

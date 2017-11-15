@@ -17,14 +17,14 @@ public class PizzaDaoImpl implements IPizzaDao {
 	 * Initialize the pizzeria with 8 pizzas
 	 */
 	private void _init() {
-		pizzas.add(new Pizza("PEP", "Pépéroni", 12.5,CategoriePizza.VIANDE));
-		pizzas.add(new Pizza("MAR", "Margherita", 14,CategoriePizza.VIANDE));
-		pizzas.add(new Pizza("REIN", "La Reine", 11.5,CategoriePizza.VIANDE));
-		pizzas.add(new Pizza("FRO", "La 4 fromages", 12,CategoriePizza.VIANDE));
-		pizzas.add(new Pizza("CAN", "La cannibale", 12.5,CategoriePizza.VIANDE));
-		pizzas.add(new Pizza("SAV", "La savoyarde", 13,CategoriePizza.VIANDE));
-		pizzas.add(new Pizza("ORI", "L'orientale", 13.5,CategoriePizza.VIANDE));
-		pizzas.add(new Pizza("IND", "L'indienne", 14,CategoriePizza.VIANDE));
+		pizzas.add(new Pizza("PEP", "Pépéroni", 12.5, CategoriePizza.VIANDE));
+		pizzas.add(new Pizza("MAR", "Margherita", 14, CategoriePizza.VIANDE));
+		pizzas.add(new Pizza("REIN", "La Reine", 11.5, CategoriePizza.VIANDE));
+		pizzas.add(new Pizza("FRO", "La 4 fromages", 12, CategoriePizza.VIANDE));
+		pizzas.add(new Pizza("CAN", "La cannibale", 12.5, CategoriePizza.VIANDE));
+		pizzas.add(new Pizza("SAV", "La savoyarde", 13, CategoriePizza.VIANDE));
+		pizzas.add(new Pizza("ORI", "L'orientale", 13.5, CategoriePizza.VIANDE));
+		pizzas.add(new Pizza("IND", "L'indienne", 14, CategoriePizza.VIANDE));
 	}
 
 	@Override
@@ -41,7 +41,7 @@ public class PizzaDaoImpl implements IPizzaDao {
 	@Override
 	public boolean updatePizza(String codePizza, Pizza pizza) {
 
-		int pizzaIndexToUpdate = getPizzaIndexByCode(codePizza);
+		int pizzaIndexToUpdate = getPizzaIndexByCode(pizzas,codePizza);
 		if (pizzaIndexToUpdate < 0)
 			return false; // pizza inexistante, on sort
 
@@ -54,7 +54,7 @@ public class PizzaDaoImpl implements IPizzaDao {
 
 	@Override
 	public boolean deletePizza(String codePizza) {
-		int pizzaIndexToDelete = getPizzaIndexByCode(codePizza);
+		int pizzaIndexToDelete = getPizzaIndexByCode(pizzas,codePizza);
 		if (pizzaIndexToDelete < 0)
 			return false;
 		// on supprime la pizza ( Pizza.delete() doit être appelé pour décrémenter le
@@ -64,16 +64,12 @@ public class PizzaDaoImpl implements IPizzaDao {
 		return true;
 	}
 
-	/**
-	 * @param code
-	 *            String unique identifier for a pizza
-	 * @return the index if the pizza exist, -1 if it doesn't
-	 */
-	public int getPizzaIndexByCode(String code) {
-		code = code.toUpperCase(); // normalization (we aren't case-sensitive)
+	@Override
+	public int getPizzaIndexByCode(List<Pizza> pizzas2, String pizzaCode) {
+		pizzaCode = pizzaCode.toUpperCase(); // normalization (we aren't case-sensitive)
 		int index = -1;
-		for (int i = 0; i < pizzas.size(); i++) {
-			if (pizzas.get(i) != null && pizzas.get(i).getCode().equals(code)) {
+		for (int i = 0; i < pizzas2.size(); i++) {
+			if (pizzas2.get(i) != null && pizzas2.get(i).getCode().equals(pizzaCode)) {
 				index = i;
 				break;
 			}

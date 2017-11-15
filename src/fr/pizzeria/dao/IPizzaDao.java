@@ -34,4 +34,13 @@ public interface IPizzaDao {
 	 * @return true if success, false if not
 	 */
 	boolean deletePizza(String codePizza);
+	
+	/**
+	 * @param pizzas2
+	 *            ArrayList<Pizza>
+	 * @param code
+	 *            String unique identifier for a pizza
+	 * @return the index if the pizza exist, -1 if it doesn't
+	 */
+	int getPizzaIndexByCode(List<Pizza> pizzas2, String pizzaCode);
 }

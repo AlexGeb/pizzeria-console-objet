@@ -1,6 +1,6 @@
 package fr.pizzeria.ihm;
 
-import fr.pizzeria.dao.PizzaDaoImpl;
+import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.exception.UnvalidCodeException;
 import fr.pizzeria.exception.UnvalidNameException;
 import fr.pizzeria.exception.UnvalidPriceException;
@@ -12,10 +12,10 @@ import fr.pizzeria.exception.UnvalidPriceException;
  */
 public abstract class OptionMenu {
 
-	protected PizzaDaoImpl pizzeria;
+	protected IPizzaDao pizzeria;
 
-	public OptionMenu(PizzaDaoImpl pizzeria) {
-		this.pizzeria = pizzeria;
+	public OptionMenu(IPizzaDao pizzeria2) {
+		this.pizzeria = pizzeria2;
 	}
 
 	/**
@@ -38,7 +38,7 @@ public abstract class OptionMenu {
 	 */
 	public abstract void execute() throws Exception;
 
-	public final PizzaDaoImpl getPizzeria() {
+	public final IPizzaDao getPizzeria() {
 		return pizzeria;
 	}
 
@@ -48,7 +48,7 @@ public abstract class OptionMenu {
 	 * @throws UnvalidCodeException
 	 */
 	protected final void checkPizzaCode(String pizzaCode) throws UnvalidCodeException {
-		if (pizzeria.getPizzaIndexByCode(pizzaCode) < 0) {
+		if (pizzeria.getPizzaIndexByCode(pizzeria.findAllPizzas(),pizzaCode) < 0) {
 			throw new UnvalidCodeException("La pizza '" + pizzaCode + "' est inconnue");
 		}
 	}
@@ -63,6 +63,8 @@ public abstract class OptionMenu {
 		double price = 0;
 		try {
 			price = new Double(pizzaPrice);
+			if(price<0)
+				throw new UnvalidPriceException("Impossible d'avoir un prix négatif");
 		} catch (NumberFormatException e) {
 			throw new UnvalidPriceException("not a number");
 		}

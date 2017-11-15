@@ -1,5 +1,7 @@
 package fr.pizzeria.console;
 
+import fr.pizzeria.dao.IPizzaDao;
+import fr.pizzeria.dao.PizzaDaoFilePersistence;
 import fr.pizzeria.ihm.Menu;
 import fr.pizzeria.swing.MyApplication;
 
@@ -25,8 +27,9 @@ public class PizzeriaAdminConsoleApp {
 	}
 
 	private static void consoleMode() throws Exception {
+		IPizzaDao daoClass = new PizzaDaoFilePersistence();
 		// creation du menu principal
-		Menu menu = new Menu();
+		Menu menu = new Menu(daoClass);
 		// Commencer à gérer les entrées utilisaeurs
 		menu.afficher();
 	}

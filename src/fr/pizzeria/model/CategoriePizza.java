@@ -12,5 +12,15 @@ public enum CategoriePizza {
 	public String getValue() {
 		return value;
 	}
+	
+	public static boolean contains(String test) {
 
+	    for (CategoriePizza c : CategoriePizza.values()) {
+	        if (c.toString().equals(test)) {
+	            return true;
+	        }
+	    }
+
+	    return false;
+	}
 }

@@ -1,0 +1,12 @@
+
+GAG ->  zelkjfi ( 4546885.0 € ) POISSON
+MAR ->  Margherita ( 14.0 € ) VIANDE
+FAGG ->  Bloubabil ( 546.0 € ) SANS_VIANDE
+FRO ->  La_4_fromages ( 12.0 € ) SANS_VIANDE
+CAN ->  La_cannibale ( 12.5 € ) VIANDE
+SAV ->  La_savoyarde ( 13.0 € ) VIANDE
+ORI ->  L'orientale ( 13.5 € ) VIANDE
+IND ->  L'indienne ( 14.0 € ) VIANDE
+POP ->  kfnek ( 45.0 € ) VIANDE
+LO ->  fklkfd ( 78.0 € ) SANS_VIANDE
+PIP ->  hzefbe ( 4.0 € ) POISSON
