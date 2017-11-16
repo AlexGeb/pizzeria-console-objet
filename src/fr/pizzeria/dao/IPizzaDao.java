@@ -34,7 +34,7 @@ public interface IPizzaDao {
 	 * @return true if success, false if not
 	 */
 	boolean deletePizza(String codePizza);
-	
+
 	/**
 	 * @param pizzas2
 	 *            ArrayList<Pizza>
