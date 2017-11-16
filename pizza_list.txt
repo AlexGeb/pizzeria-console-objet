@@ -8,3 +8,4 @@ ORI ->  L'orientale ( 13.5 € ) VIANDE
 IND ->  L'indienne ( 14.0 € ) VIANDE
 POP ->  kfnek ( 45.0 € ) VIANDE
 LO ->  fklkfd ( 78.0 € ) SANS_VIANDE
+DNZ ->  juoz ( 45.0 € ) POISSON

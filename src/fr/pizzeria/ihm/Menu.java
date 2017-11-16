@@ -1,8 +1,6 @@
 package fr.pizzeria.ihm;
 
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -30,7 +28,14 @@ public class Menu {
 
 	/**
 	 * Initialisation of the Menu : 5 options
+	 * @param mode 
 	 */
+	public Menu(IPizzaDao daoClass, Scanner mode) {
+		this(daoClass);
+		this.scanner = mode;
+		
+	}
+
 	public Menu(IPizzaDao daoClass) {
 		IPizzaDao pizzeria = daoClass;
 		actions.put(1, new ListerPizzasOptionMenu(pizzeria));

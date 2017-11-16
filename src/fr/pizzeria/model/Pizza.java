@@ -1,6 +1,5 @@
 package fr.pizzeria.model;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 
 /**

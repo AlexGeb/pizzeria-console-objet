@@ -18,7 +18,10 @@ import java.lang.annotation.Target;
 @Target({ ElementType.FIELD }) // can only be used on attributes
 public @interface ToString {
 	boolean uppercase() default false;
+
 	String symbol() default "";
+
 	String surroundedBefore() default " ";
+
 	String surroundedAfter() default " ";
 }

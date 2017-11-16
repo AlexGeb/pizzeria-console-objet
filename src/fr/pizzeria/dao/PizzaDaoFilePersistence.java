@@ -111,17 +111,4 @@ public class PizzaDaoFilePersistence implements IPizzaDao {
 			// ex.printStackTrace();
 		}
 	}
-
-	@Override
-	public int getPizzaIndexByCode(List<Pizza> pizzas2, String pizzaCode) {
-		pizzaCode = pizzaCode.toUpperCase(); // normalization (we aren't case-sensitive)
-		int index = -1;
-		for (int i = 0; i < pizzas2.size(); i++) {
-			if (pizzas2.get(i) != null && pizzas2.get(i).getCode().equals(pizzaCode)) {
-				index = i;
-				break;
-			}
-		}
-		return index;
-	}
 }
