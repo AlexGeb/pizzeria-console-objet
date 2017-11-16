@@ -7,7 +7,7 @@ import java.lang.reflect.Field;
  */
 public class Pizza {
 
-	private static int numOfPizzas = 0; // variable pour garder en mémoire le nombre de pizza
+	private static int numOfPizzas = 0; // variable pour garder en mï¿½moire le nombre de pizza
 
 	@ToString(uppercase = true, symbol = " ->")
 	private String code;
@@ -43,7 +43,7 @@ public class Pizza {
 	/**
 	 * 
 	 * @param line,
-	 *            should be on the form : "CAN -> La cannibale ( 12.5 € ) Viande"
+	 *            should be on the form : "CAN -> La cannibale ( 12.5 ï¿½ ) Viande"
 	 */
 	public Pizza(String line) {
 		this();
@@ -69,8 +69,8 @@ public class Pizza {
 	/*
 	 * equals
 	 * 
-	 * @see java.lang.Object#equals(java.lang.Object) deux pizzas sont égales si
-	 * elles ont le même code
+	 * @see java.lang.Object#equals(java.lang.Object) deux pizzas sont ï¿½gales si
+	 * elles ont le mï¿½me code
 	 */
 	@Override
 	public boolean equals(Object obj) {
@@ -112,7 +112,7 @@ public class Pizza {
 				}
 			}
 		}
-		return pizzaString.trim();
+		return pizzaString.trim().replace("_", " ");
 	}
 
 	/**

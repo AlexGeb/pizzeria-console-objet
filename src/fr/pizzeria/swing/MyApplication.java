@@ -13,13 +13,13 @@ public class MyApplication extends DefaultSwingApplication {
 	}
 
 	public void configureUI() {
-		configureWindow("Title", 400, 400);
+		configureWindow("Title", 400, 600);
 		int verticalPosition = 0;
 		for(Map.Entry<Integer, OptionMenu> pair : menu.actions.entrySet()) {
 			verticalPosition+=30;
 			addButton(pair.getKey(), pair.getValue().getLibelle(), 20, verticalPosition);
 		}
-		setTextArea(20, 180);
+		setTextArea(20, verticalPosition+30);
 	}
 
 	public void initContext(ApplicationContext context) {

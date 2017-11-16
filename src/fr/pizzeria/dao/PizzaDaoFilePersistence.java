@@ -63,12 +63,13 @@ public class PizzaDaoFilePersistence implements IPizzaDao {
 
 			// Always close files.
 			bufferedWriter.close();
+			return true;
 		} catch (IOException ex) {
 			System.out.println("Error writing to file '" + FILE_NAME + "'");
 			// Or we could just do this:
 			// ex.printStackTrace();
+			return false;
 		}
-		return false;
 	}
 
 	@Override
