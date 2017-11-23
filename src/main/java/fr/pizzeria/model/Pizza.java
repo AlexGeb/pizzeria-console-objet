@@ -14,7 +14,7 @@ public class Pizza {
 	@ToString()
 	private String name;
 	@ToString(symbol = " €", surroundedBefore = "( ", surroundedAfter = " )")
-	private Double price;
+	private Double  price;
 	@ToString()
 	private CategoriePizza categoriePizza;
 
