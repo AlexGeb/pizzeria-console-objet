@@ -57,7 +57,7 @@ public class PizzaDaoImpl implements IPizzaDao {
 		int pizzaIndexToDelete = getPizzaIndexByCode(pizzas,codePizza);
 		if (pizzaIndexToDelete < 0)
 			return false;
-		// on supprime la pizza ( Pizza.delete() doit �tre appelé pour décrémenter le
+		// on supprime la pizza ( Pizza.delete() doit être appelé pour décrémenter le
 		// nombre total de pizzas)
 		Pizza.delete();
 		pizzas.remove(pizzaIndexToDelete);
