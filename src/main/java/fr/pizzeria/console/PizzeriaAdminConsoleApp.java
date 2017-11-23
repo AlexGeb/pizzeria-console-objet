@@ -1,9 +1,9 @@
 package fr.pizzeria.console;
 
 import java.util.Scanner;
+import java.util.ResourceBundle;
 
 import fr.pizzeria.dao.IPizzaDao;
-import fr.pizzeria.dao.PizzaDaoFilePersistence;
 import fr.pizzeria.ihm.Menu;
 import fr.pizzeria.swing.MyApplication;
 
@@ -24,6 +24,9 @@ public class PizzeriaAdminConsoleApp {
 	 * @throws Exception 
 	 */
 	public static void main(String[] args) throws Exception {
+		String daoimpl = ResourceBundle.getBundle("application").getString("daoImplementation");
+		IPizzaDao instanceDao = (IPizzaDao) Class.forName(daoimpl).newInstance();
+		
 		System.out.println("Choisissez un mode");
 		System.out.println("1 => mode console");
 		System.out.println("2 => mode ihm");
@@ -31,27 +34,25 @@ public class PizzeriaAdminConsoleApp {
 		String choix = mode.nextLine();
 		switch (choix) {
 		case "1":
-			consoleMode(mode);
+			consoleMode(mode,instanceDao);
 			break;
 		case "2":
-			ihmMode();
+			ihmMode(instanceDao);
 			break;
 		default:
-			consoleMode(mode);
+			consoleMode(mode,instanceDao);
 			break;
 		}
 	}
 
-	private static void consoleMode(Scanner mode) throws Exception {
-		IPizzaDao daoClass = new PizzaDaoFilePersistence();
+	private static void consoleMode(Scanner mode,IPizzaDao daoClass) throws Exception {
 		// creation du menu principal
 		Menu menu = new Menu(daoClass,mode);
 		// Commencer à gérer les entrées utilisaeurs
 		menu.afficher();
 	}
 
-	private static void ihmMode() {
-		IPizzaDao daoClass = new PizzaDaoFilePersistence();
+	private static void ihmMode(IPizzaDao daoClass) {
 		// creation du menu principal
 		Menu menu = new Menu(daoClass);
 		MyApplication.start(menu);

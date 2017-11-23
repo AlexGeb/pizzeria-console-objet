@@ -13,7 +13,7 @@ public class Pizza {
 	private String code;
 	@ToString()
 	private String name;
-	@ToString(symbol = " \u20ac", surroundedBefore = "( ", surroundedAfter = " )")
+	@ToString(symbol = " €", surroundedBefore = "( ", surroundedAfter = " )")
 	private double price;
 	@ToString()
 	private CategoriePizza categoriePizza;
