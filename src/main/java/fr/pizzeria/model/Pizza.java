@@ -7,7 +7,7 @@ import java.lang.reflect.Field;
  */
 public class Pizza {
 
-	private static int numOfPizzas = 0; // variable pour garder en m�moire le nombre de pizza
+	private static int numOfPizzas = 0; // variable pour garder en mémoire le nombre de pizza
 
 	@ToString(uppercase = true, symbol = " ->")
 	private String code;
@@ -16,7 +16,7 @@ public class Pizza {
 	@ToString(symbol = " €", surroundedBefore = "( ", surroundedAfter = " )")
 	private Double  price;
 	@ToString()
-	private CategoriePizza categoriePizza;
+	private CategoriePizza categorie;
 
 	private Pizza() {
 		numOfPizzas++;
@@ -32,12 +32,12 @@ public class Pizza {
 	 * @param price
 	 *            Double => prix de la pizza
 	 */
-	public Pizza(String code, String name, double price, CategoriePizza categoriePizza) {
+	public Pizza(String code, String name, double price, CategoriePizza categorie) {
 		this();
 		this.code = code.toUpperCase(); // toUpperCase() pour normalizer les codes
 		this.name = name;
 		this.price = price;
-		this.categoriePizza = categoriePizza;
+		this.categorie = categorie;
 	}
 
 	/**
@@ -52,7 +52,7 @@ public class Pizza {
 		this.code = fields[0].trim().toUpperCase();
 		this.name = fields[1].trim();
 		this.price = new Double(fields[2].trim());
-		this.categoriePizza = CategoriePizza.valueOf(fields[3].toUpperCase());
+		this.categorie = CategoriePizza.valueOf(fields[3].toUpperCase());
 	}
 
 	/**
@@ -66,6 +66,14 @@ public class Pizza {
 		return null;
 	}
 
+	/**
+	 * @return le String correspondant à :
+	 * 			"code;name;price;categorie"
+	 */
+	public String toStringForFile() {
+		return String.join(";", code.toUpperCase(),name,price.toString(), categorie.toString());
+	}
+	
 	/*
 	 * equals
 	 * 

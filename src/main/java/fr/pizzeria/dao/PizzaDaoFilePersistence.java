@@ -59,7 +59,7 @@ public class PizzaDaoFilePersistence implements IPizzaDao {
 			// Note that write() does not automatically
 			// append a newline character.
 			bufferedWriter.newLine();
-			bufferedWriter.write(pizza.toString());
+			bufferedWriter.write(pizza.toStringForFile());
 
 			// Always close files.
 			bufferedWriter.close();
