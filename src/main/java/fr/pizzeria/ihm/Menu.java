@@ -28,12 +28,13 @@ public class Menu {
 
 	/**
 	 * Initialisation of the Menu : 5 options
-	 * @param mode 
+	 * 
+	 * @param mode
 	 */
 	public Menu(IPizzaDao daoClass, Scanner mode) {
 		this(daoClass);
 		this.scanner = mode;
-		
+
 	}
 
 	public Menu(IPizzaDao daoClass) {
@@ -52,9 +53,9 @@ public class Menu {
 	 */
 	private void display() {
 		System.out.println(TITRE);
-		for (Map.Entry<Integer, OptionMenu> pair : actions.entrySet()) {
-			System.out.println(pair.getKey() + ". " + pair.getValue().getLibelle());
-		}
+		actions.entrySet().stream().sorted((e1, e2) -> {
+			return Integer.compare(e1.getKey(), e2.getKey());
+		}).forEach(pair -> System.out.println(pair.getKey() + ". " + pair.getValue().getLibelle()));
 	}
 
 	/**

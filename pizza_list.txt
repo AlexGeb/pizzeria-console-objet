@@ -3,10 +3,9 @@ MAR;Margherita;14.0;VIANDE
 FAGG;Bloubabil;546.0;SANS_VIANDE
 CAN;mouche;3.0;POISSON
 SAV;La savoyarde;13.0;VIANDE
-ORI;L'orientale;13.5;VIANDE
+KIKO;amerlok;89.0;POISSON
 POP;kfnek;45.0;VIANDE
 LO;fklkfd;78.0;SANS_VIANDE
 DNZ;juoz;45.0;POISSON
 MAN;manous;12.0;VIANDE
-MOP;Alleluia;1.0;VIANDE
 FUL;fulla;5.0;VIANDE
