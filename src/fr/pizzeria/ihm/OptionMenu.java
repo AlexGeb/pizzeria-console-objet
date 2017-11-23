@@ -66,7 +66,7 @@ public abstract class OptionMenu {
 		try {
 			price = new Double(pizzaPrice);
 			if(price<0)
-				throw new UnvalidPriceException("Impossible d'avoir un prix négatif");
+				throw new UnvalidPriceException("Impossible d'avoir un prix nÃ©gatif");
 		} catch (NumberFormatException e) {
 			throw new UnvalidPriceException("not a number");
 		}

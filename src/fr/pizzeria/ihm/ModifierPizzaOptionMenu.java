@@ -26,7 +26,7 @@ public class ModifierPizzaOptionMenu extends OptionMenu {
 	@Override
 	public void execute() throws UnvalidCodeException, UnvalidNameException, UnvalidPriceException {
 		new ListerPizzasOptionMenu(pizzeria).execute();
-		System.out.println("Veuillez choisir la pizza à modifier : ");
+		System.out.println("Veuillez choisir la pizza Ã  modifier : ");
 		System.out.println("(99 pour abandonner)");
 		String code = menu.nextLine();
 		if (code.equals("99")) {

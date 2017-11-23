@@ -17,7 +17,7 @@ public class PizzaDaoImpl implements IPizzaDao {
 	 * Initialize the pizzeria with 8 pizzas
 	 */
 	private void _init() {
-		pizzas.add(new Pizza("PEP", "Pépéroni", 12.5, CategoriePizza.VIANDE));
+		pizzas.add(new Pizza("PEP", "PÃ©pÃ©roni", 12.5, CategoriePizza.VIANDE));
 		pizzas.add(new Pizza("MAR", "Margherita", 14, CategoriePizza.VIANDE));
 		pizzas.add(new Pizza("REIN", "La Reine", 11.5, CategoriePizza.VIANDE));
 		pizzas.add(new Pizza("FRO", "La 4 fromages", 12, CategoriePizza.VIANDE));
@@ -45,7 +45,7 @@ public class PizzaDaoImpl implements IPizzaDao {
 		if (pizzaIndexToUpdate < 0)
 			return false; // pizza inexistante, on sort
 
-		// on supprime l'ancienne pizza (doit être appelé pour décrémenter le nombre
+		// on supprime l'ancienne pizza (doit Ãªtre appelÃ© pour dÃ©crÃ©menter le nombre
 		// total de pizzas)
 		Pizza.delete();
 		pizzas.set(pizzaIndexToUpdate, pizza);
@@ -57,7 +57,7 @@ public class PizzaDaoImpl implements IPizzaDao {
 		int pizzaIndexToDelete = getPizzaIndexByCode(pizzas,codePizza);
 		if (pizzaIndexToDelete < 0)
 			return false;
-		// on supprime la pizza ( Pizza.delete() doit être appelé pour décrémenter le
+		// on supprime la pizza ( Pizza.delete() doit ï¿½tre appelÃ© pour dÃ©crÃ©menter le
 		// nombre total de pizzas)
 		Pizza.delete();
 		pizzas.remove(pizzaIndexToDelete);

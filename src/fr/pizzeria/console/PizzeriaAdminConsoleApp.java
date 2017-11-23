@@ -18,7 +18,7 @@ import fr.pizzeria.swing.MyApplication;
 public class PizzeriaAdminConsoleApp {
 
 	/**
-	 * Méthode main
+	 * MÃ©thode main
 	 * 
 	 * @param args
 	 * @throws Exception 
@@ -46,7 +46,7 @@ public class PizzeriaAdminConsoleApp {
 		IPizzaDao daoClass = new PizzaDaoFilePersistence();
 		// creation du menu principal
 		Menu menu = new Menu(daoClass,mode);
-		// Commencer à gérer les entrées utilisaeurs
+		// Commencer Ã  gÃ©rer les entrÃ©es utilisaeurs
 		menu.afficher();
 	}
 
