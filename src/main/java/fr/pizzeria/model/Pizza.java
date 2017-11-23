@@ -14,7 +14,7 @@ public class Pizza {
 	@ToString()
 	private String name;
 	@ToString(symbol = " €", surroundedBefore = "( ", surroundedAfter = " )")
-	private double price;
+	private Double price;
 	@ToString()
 	private CategoriePizza categoriePizza;
 
@@ -47,12 +47,12 @@ public class Pizza {
 	 */
 	public Pizza(String line) {
 		this();
-		String delims = "[ ]+";
+		String delims = ";";
 		String[] fields = line.trim().split(delims);
-		this.code = fields[0].toUpperCase();
-		this.name = fields[2];
-		this.price = new Double(fields[4]);
-		this.categoriePizza = CategoriePizza.valueOf(fields[7].toUpperCase());
+		this.code = fields[0].trim().toUpperCase();
+		this.name = fields[1].trim();
+		this.price = new Double(fields[2].trim());
+		this.categoriePizza = CategoriePizza.valueOf(fields[3].toUpperCase());
 	}
 
 	/**
