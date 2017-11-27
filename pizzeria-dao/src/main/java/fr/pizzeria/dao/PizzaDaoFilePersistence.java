@@ -2,6 +2,7 @@ package fr.pizzeria.dao;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -12,9 +13,10 @@ import java.util.List;
 import fr.pizzeria.model.Pizza;
 
 public class PizzaDaoFilePersistence implements IPizzaDao {
-	private final String FILE_NAME = "pizza_list.txt";
+	private final String FILE_NAME = "../pizza_list.txt";
 
 	public PizzaDaoFilePersistence() {
+
 	}
 
 	@Override
@@ -110,6 +112,19 @@ public class PizzaDaoFilePersistence implements IPizzaDao {
 			System.out.println("Error deleting lines in file '" + FILE_NAME + "'");
 			// Or we could just do this:
 			// ex.printStackTrace();
+		}
+	}
+
+	private void showFilesofFolder() {
+		File folder = new File("../");
+		File[] listOfFiles = folder.listFiles();
+
+		for (int i = 0; i < listOfFiles.length; i++) {
+			if (listOfFiles[i].isFile()) {
+				System.out.println("File " + listOfFiles[i].getName());
+			} else if (listOfFiles[i].isDirectory()) {
+				System.out.println("Directory " + listOfFiles[i].getName());
+			}
 		}
 	}
 }

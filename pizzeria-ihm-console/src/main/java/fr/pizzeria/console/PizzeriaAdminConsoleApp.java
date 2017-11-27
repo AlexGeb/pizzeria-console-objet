@@ -32,6 +32,7 @@ public class PizzeriaAdminConsoleApp {
 		System.out.println("2 => mode ihm");
 		Scanner mode = new Scanner(System.in);
 		String choix = mode.nextLine();
+		
 		switch (choix) {
 		case "1":
 			consoleMode(mode,instanceDao);
