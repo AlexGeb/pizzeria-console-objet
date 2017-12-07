@@ -7,6 +7,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<dao-impl>fr.pizzeria.dao.PizzaDaoFilePersistence</dao-impl>
+		<junit.version>3.8.1</junit.version>
 	</properties>
 	<build>
 		<resources>
@@ -71,4 +72,12 @@
 		</profile>
 	</profiles>
 
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
 </project>
