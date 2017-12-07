@@ -67,7 +67,13 @@
 		<profile>
 			<id>mem</id>
 			<properties>
-				<mode>fr.pizzeria.dao.PizzaDaoImpl</mode>
+				<dao-impl>fr.pizzeria.dao.PizzaDaoImpl</dao-impl>
+			</properties>
+		</profile>
+		<profile>
+			<id>postgresql_database</id>
+			<properties>
+				<dao-impl>fr.pizzeria.dao.PizzaDaoJdbcImpl</dao-impl>
 			</properties>
 		</profile>
 	</profiles>
@@ -78,6 +84,11 @@
 			<artifactId>junit</artifactId>
 			<version>${junit.version}</version>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>42.1.4</version>
 		</dependency>
 	</dependencies>
 </project>

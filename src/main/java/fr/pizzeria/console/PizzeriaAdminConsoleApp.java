@@ -1,10 +1,13 @@
 package fr.pizzeria.console;
 
 import java.util.Scanner;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import fr.pizzeria.dao.IPizzaDao;
+import fr.pizzeria.dao.PizzaDaoJdbcImpl;
 import fr.pizzeria.ihm.Menu;
+import fr.pizzeria.model.Pizza;
 import fr.pizzeria.swing.MyApplication;
 
 /** 
@@ -23,20 +26,15 @@ public class PizzeriaAdminConsoleApp {
 	 * @param args
 	 * @throws Exception 
 	 */
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) throws Exception {		
 		String daoimpl = ResourceBundle.getBundle("application").getString("daoImplementation");
 		IPizzaDao instanceDao = (IPizzaDao) Class.forName(daoimpl).newInstance();
-		
-		System.out.println("Choisissez un mode");
-		System.out.println("1 => mode console");
-		System.out.println("2 => mode ihm");
 		Scanner mode = new Scanner(System.in);
-		String choix = mode.nextLine();
-		switch (choix) {
-		case "1":
+		switch (ResourceBundle.getBundle("application").getString("ihmMode")) {
+		case "console":
 			consoleMode(mode,instanceDao);
 			break;
-		case "2":
+		case "swing":
 			ihmMode(instanceDao);
 			break;
 		default:

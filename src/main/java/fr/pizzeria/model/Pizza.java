@@ -14,7 +14,7 @@ public class Pizza {
 	@ToString()
 	private String name;
 	@ToString(symbol = " €", surroundedBefore = "( ", surroundedAfter = " )")
-	private Double  price;
+	private Double price;
 	@ToString()
 	private CategoriePizza categorie;
 
@@ -135,6 +135,27 @@ public class Pizza {
 	 */
 	public String getCode() {
 		return code;
+	}
+	
+	/**
+	 * @return the name of the pizza
+	 */
+	public String getName() {
+		return name;
+	}
+	
+	/**
+	 * @return the price of the pizza
+	 */
+	public Double getPrice() {
+		return price;
+	}
+	
+	/**
+	 * @return the category of the pizza
+	 */
+	public CategoriePizza getCategory() {
+		return categorie;
 	}
 
 }

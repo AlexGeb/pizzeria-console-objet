@@ -7,7 +7,7 @@ import fr.pizzeria.model.Pizza;
 import fr.pizzeria.model.CategoriePizza;
 
 public class PizzaDaoImpl implements IPizzaDao {
-	private List<Pizza> pizzas = new ArrayList<Pizza>(); // pre-allocate 100 places for pizzas
+	private List<Pizza> pizzas = new ArrayList<Pizza>();
 
 	public PizzaDaoImpl() {
 		_init();
