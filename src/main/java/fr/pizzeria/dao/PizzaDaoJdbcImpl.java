@@ -1,7 +1,6 @@
 package fr.pizzeria.dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,29 +12,15 @@ import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
 public class PizzaDaoJdbcImpl extends DaoJdbc implements IPizzaDao {
-	private Connection conn;
 
-	public PizzaDaoJdbcImpl() throws ClassNotFoundException, SQLException {
-		_init();
+	public PizzaDaoJdbcImpl() {
+		super();
 		addPizzas();
-	}
-
-	private void _init() {
-
-		try {
-			Class.forName("org.postgresql.Driver");
-			String host = "blsxb6cjfpu78rs-postgresql.services.clever-cloud.com:5432/blsxb6cjfpu78rs";
-			String password = "q1xKatkfZuz6LdazL1zT";
-			String user = "upq079x4usuy8be9s8yj";
-			String URLConnection = "jdbc:postgresql://" + host;
-			conn = DriverManager.getConnection(URLConnection, user, password);
-		} catch (SQLException | ClassNotFoundException e) {
-			throw new RuntimeException(e.getMessage());
-		}
 	}
 
 	@Override
 	public List<Pizza> findAllPizzas() {
+		Connection conn = getConnection();
 		try {
 			PreparedStatement prepStat = conn.prepareStatement("SELECT * FROM pizza");
 			ResultSet result = prepStat.executeQuery();
@@ -48,6 +33,7 @@ public class PizzaDaoJdbcImpl extends DaoJdbc implements IPizzaDao {
 
 	private void addPizzas() {
 		List<Pizza> pizzas = new ArrayList<Pizza>();
+		Connection conn = getConnection();
 		try {
 			Statement stat = conn.createStatement();
 			ResultSet result = stat.executeQuery("SELECT count(*) FROM pizza");
@@ -97,9 +83,11 @@ public class PizzaDaoJdbcImpl extends DaoJdbc implements IPizzaDao {
 
 	@Override
 	public boolean saveNewPizza(Pizza pizza) {
+		Connection conn = null;
+		PreparedStatement prepInsert = null;
 		try {
-			PreparedStatement prepInsert = conn
-					.prepareStatement("INSERT INTO pizza (code,name,price,category) VALUES (?,?,?,?)");
+			conn = getConnection();
+			prepInsert = conn.prepareStatement("INSERT INTO pizza (code,name,price,category) VALUES (?,?,?,?)");
 			prepInsert.setString(1, pizza.getCode());
 			prepInsert.setString(2, pizza.getName());
 			prepInsert.setDouble(3, pizza.getPrice());
@@ -107,15 +95,20 @@ public class PizzaDaoJdbcImpl extends DaoJdbc implements IPizzaDao {
 			Integer numInsert = prepInsert.executeUpdate();
 			return numInsert.equals(1);
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			manageSqlException(e);
 			return false;
+		} finally {
+			closeSqlResources(conn, prepInsert, null);
 		}
 	}
 
 	@Override
 	public boolean updatePizza(String codePizza, Pizza pizza) {
+		Connection conn = null;
+		PreparedStatement prepInsert = null;
 		try {
-			PreparedStatement prepInsert = conn.prepareStatement("UPDATE pizza SET code=? ,name=?,price=?,category=? WHERE code=?");
+			conn = getConnection();
+			prepInsert = conn.prepareStatement("UPDATE pizza SET code=? ,name=?,price=?,category=? WHERE code=?");
 			prepInsert.setString(1, pizza.getCode());
 			prepInsert.setString(2, pizza.getName());
 			prepInsert.setDouble(3, pizza.getPrice());
@@ -124,21 +117,28 @@ public class PizzaDaoJdbcImpl extends DaoJdbc implements IPizzaDao {
 			Integer numupdated = prepInsert.executeUpdate();
 			return numupdated.equals(1);
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			manageSqlException(e);
 			return false;
+		} finally {
+			closeSqlResources(conn, prepInsert, null);
 		}
 	}
 
 	@Override
 	public boolean deletePizza(String codePizza) {
+		Connection conn = null;
+		PreparedStatement prepInsert = null;
 		try {
-			PreparedStatement prepInsert = conn.prepareStatement("DELETE FROM pizza WHERE code=?");
+			conn = getConnection();
+			prepInsert = conn.prepareStatement("DELETE FROM pizza WHERE code=?");
 			prepInsert.setString(1, codePizza);
 			Integer numDeleted = prepInsert.executeUpdate();
 			return numDeleted.equals(1);
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			manageSqlException(e);
 			return false;
+		} finally {
+			closeSqlResources(conn, prepInsert, null);
 		}
 	}
 
