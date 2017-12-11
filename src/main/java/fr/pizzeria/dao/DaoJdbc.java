@@ -6,6 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import fr.pizzeria.exception.ExitException;
 
 public abstract class DaoJdbc {
@@ -14,6 +17,7 @@ public abstract class DaoJdbc {
 	private String host = "blsxb6cjfpu78rs-postgresql.services.clever-cloud.com:5432/blsxb6cjfpu78rs";
 	private String password = "q1xKatkfZuz6LdazL1zT";
 	private String user = "upq079x4usuy8be9s8yj";
+	protected final Logger LOGGER = LoggerFactory.getLogger(DaoJdbc.class);
 
 	public DaoJdbc() {
 		_init();
@@ -37,6 +41,7 @@ public abstract class DaoJdbc {
 		try {
 			Class.forName("org.postgresql.Driver");
 		} catch (ClassNotFoundException e) {
+			LOGGER.error(e.getMessage());
 			throw new RuntimeException(e.getMessage());
 		}
 	}
@@ -46,8 +51,7 @@ public abstract class DaoJdbc {
 			try {
 				res.close();
 			} catch (SQLException e) {
-				System.out.println(e.getMessage());
-				throw new RuntimeException(e.getMessage());
+				manageSqlException(e);
 			}
 		}
 
@@ -55,8 +59,7 @@ public abstract class DaoJdbc {
 			try {
 				statement.close();
 			} catch (SQLException e) {
-				System.out.println(e.getMessage());
-				throw new RuntimeException(e.getMessage());
+				manageSqlException(e);
 			}
 		}
 
@@ -64,14 +67,12 @@ public abstract class DaoJdbc {
 			try {
 				conn.close();
 			} catch (SQLException e) {
-				System.out.println(e.getMessage());
-
-				throw new RuntimeException(e.getMessage());
+				manageSqlException(e);
 			}
 		}
 	}
 	protected void manageSqlException(SQLException e) {
-		System.out.println(e.getMessage());
+		LOGGER.error(e.getMessage());
 		throw new ExitException(e.getMessage());
 	}
 }

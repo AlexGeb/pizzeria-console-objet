@@ -26,7 +26,7 @@ public class PizzaDaoJdbcImpl extends DaoJdbc implements IPizzaDao {
 			ResultSet result = prepStat.executeQuery();
 			return getListFromResultSet(result);
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			LOGGER.error(e.getMessage());
 			return new ArrayList<Pizza>();
 		}
 	}
@@ -37,13 +37,13 @@ public class PizzaDaoJdbcImpl extends DaoJdbc implements IPizzaDao {
 		try {
 			Statement stat = conn.createStatement();
 			ResultSet result = stat.executeQuery("SELECT count(*) FROM pizza");
-			stat.close();
 			Integer count = 0;
 			while (result.next()) {
 				count = result.getInt(1);
 			}
 			result.close();
-			System.out.println("nombre de pizza : " + count);
+			stat.close();
+			LOGGER.debug("nombre de pizza : " + count);
 			if (count < 8) {
 				pizzas.add(new Pizza("PEP", "Pépéroni", 12.5, CategoriePizza.VIANDE));
 				pizzas.add(new Pizza("MAR", "Margherita", 14, CategoriePizza.VIANDE));
@@ -67,7 +67,7 @@ public class PizzaDaoJdbcImpl extends DaoJdbc implements IPizzaDao {
 				prepInsert.close();
 			}
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			manageSqlException(e);
 		}
 	}
 
