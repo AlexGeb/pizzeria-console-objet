@@ -2,19 +2,41 @@ package fr.pizzeria.model;
 
 import java.lang.reflect.Field;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * @author ETY0002 Class Pizza
  */
+@Entity
+@Table(name = "pizza")
 public class Pizza {
 
 	private static int numOfPizzas = 0; // variable pour garder en mémoire le nombre de pizza
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 
+	@Column
 	@ToString(uppercase = true, symbol = " ->")
 	private String code;
+
+	@Column
 	@ToString()
 	private String name;
+
+	@Column
 	@ToString(symbol = " €", surroundedBefore = "( ", surroundedAfter = " )")
 	private Double price;
+
+	@Column
+	@Enumerated(EnumType.STRING)
 	@ToString()
 	private CategoriePizza categorie;
 
@@ -67,13 +89,12 @@ public class Pizza {
 	}
 
 	/**
-	 * @return le String correspondant à :
-	 * 			"code;name;price;categorie"
+	 * @return le String correspondant à : "code;name;price;categorie"
 	 */
 	public String toStringForFile() {
-		return String.join(";", code.toUpperCase(),name,price.toString(), categorie.toString());
+		return String.join(";", code.toUpperCase(), name, price.toString(), categorie.toString());
 	}
-	
+
 	/*
 	 * equals
 	 * 
@@ -136,21 +157,21 @@ public class Pizza {
 	public String getCode() {
 		return code;
 	}
-	
+
 	/**
 	 * @return the name of the pizza
 	 */
 	public String getName() {
 		return name;
 	}
-	
+
 	/**
 	 * @return the price of the pizza
 	 */
 	public Double getPrice() {
 		return price;
 	}
-	
+
 	/**
 	 * @return the category of the pizza
 	 */
