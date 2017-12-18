@@ -6,13 +6,14 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 import fr.pizzeria.model.Pizza;
 
 public class PizzaDaoFilePersistence implements IPizzaDao {
-	private final String FILE_NAME = "pizza_list.txt";
+	private final URL FILE_NAME = this.getClass().getClassLoader().getResource("pizza_list.txt");
 
 	public PizzaDaoFilePersistence() {
 	}
@@ -22,7 +23,7 @@ public class PizzaDaoFilePersistence implements IPizzaDao {
 		List<Pizza> finalList = new ArrayList<Pizza>();
 		try {
 			// FileReader reads text files in the default encoding.
-			FileReader fileReader = new FileReader(FILE_NAME);
+			FileReader fileReader = new FileReader(FILE_NAME.getPath());
 
 			// Always wrap FileReader in BufferedReader.
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -51,7 +52,7 @@ public class PizzaDaoFilePersistence implements IPizzaDao {
 	public boolean saveNewPizza(Pizza pizza) {
 		try {
 			// Assume default encoding.
-			FileWriter fileWriter = new FileWriter(FILE_NAME, true);
+			FileWriter fileWriter = new FileWriter(FILE_NAME.getPath(), true);
 
 			// Always wrap FileWriter in BufferedWriter.
 			BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
@@ -102,7 +103,7 @@ public class PizzaDaoFilePersistence implements IPizzaDao {
 
 	private void deleteAll() {
 		try {
-			FileWriter fileWriter = new FileWriter(FILE_NAME, false);
+			FileWriter fileWriter = new FileWriter(FILE_NAME.getPath(), false);
 			BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 			bufferedWriter.write("");
 			bufferedWriter.close();
