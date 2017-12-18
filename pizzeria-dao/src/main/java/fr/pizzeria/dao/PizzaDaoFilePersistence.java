@@ -111,8 +111,6 @@ public class PizzaDaoFilePersistence implements IPizzaDao {
 			bufferedWriter.close();
 		} catch (IOException ex) {
 			System.out.println("Error deleting lines in file '" + FILE_NAME + "'");
-			// Or we could just do this:
-			// ex.printStackTrace();
 		}
 	}
 }
