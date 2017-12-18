@@ -10,7 +10,36 @@
 		<dao-impl>fr.pizzeria.dao.PizzaDaoFilePersistence</dao-impl>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
-	</properties> 
+	</properties>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<configuration>
+						<source>${maven.compiler.source}</source>
+						<target>${maven.compiler.target}</target>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>2.4</version>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-shade-plugin</artifactId>
+					<version>3.0.0</version>
+				</plugin>
+
+			</plugins>
+		</pluginManagement>
+	</build>
+
 	<dependencyManagement>
 		<dependencies>
 
@@ -47,29 +76,11 @@
 
 		</dependencies>
 	</dependencyManagement>
-	
+
 	<modules>
 		<module>pizzeria-dao</module>
 		<module>pizzeria-ihm-console</module>
 		<module>pizzeria-model</module>
 	</modules>
-
-	<profiles>
-		<profile>
-			<id>file</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<properties>
-				<dao-impl>fr.pizzeria.dao.PizzaDaoFilePersistence</dao-impl>
-			</properties>
-		</profile>
-		<profile>
-			<id>mem</id>
-			<properties>
-				<mode>fr.pizzeria.dao.PizzaDaoImpl</mode>
-			</properties>
-		</profile>
-	</profiles>
 
 </project>

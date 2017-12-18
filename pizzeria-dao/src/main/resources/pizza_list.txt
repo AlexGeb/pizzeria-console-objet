@@ -1,4 +1,3 @@
-
 MAR;Margherita;14.0;VIANDE
 FAGG;Bloubabil;546.0;SANS_VIANDE
 CAN;mouche;3.0;POISSON
